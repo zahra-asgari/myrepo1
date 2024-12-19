@@ -1,0 +1,8 @@
+//______________________________RIS/SR SHARING SECTION_____________________________
+forall(r in C)
+    RIS_tdm:
+        sum(t in T, c in C: c != r)(ris_airtime_dl[t][c][r]+ris_airtime_ul[t][c][r])*x_ris[t][c][r] <= y_ris[r];
+
+forall(r in C)
+    SR_tdm:
+        sum(t in T, c in C: c != r)(sr_airtime_dl[t][c][r]+sr_airtime_ul[t][c][r])*x_sr[t][c][r] <= y_sr[r];

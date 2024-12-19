@@ -1,0 +1,5 @@
+//______________________________ANGLES&LEN SECTION_____________________________
+
+    forall(t in T, d in C, r in C: d != r)
+        angle_sep1:
+            min_angle[t] <= smallest_angles[t][d][r] + 180*(1-x[t][d][r]);

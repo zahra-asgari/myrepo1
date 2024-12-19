@@ -1,0 +1,1 @@
+dir_p_mask = direct_rate >= R_min;

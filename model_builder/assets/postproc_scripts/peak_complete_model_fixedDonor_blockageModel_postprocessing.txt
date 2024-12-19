@@ -1,0 +1,373 @@
+
+//---------POST PROCESSING----------
+
+execute{
+
+var ofile = new IloOplOutputFile(output_filename);
+var output = "";
+
+var after = new Date();
+var output = "time = "
+output += after.getTime()-temp
+output += ";"
+ofile.writeln(output);
+
+//------variable y_don
+
+output = "y_don = [";
+
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_don[c];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+//------variable y_iab
+
+output = "y_iab = [";
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_iab[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable y_ris
+
+output = "y_ris = [";
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_ris[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable y_ncr
+
+output = "y_ncr = [";
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_ncr[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+//-------variable z
+output = "z = [";
+    for(var c in thisOplModel.C){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.z[c][d];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+//------variable x
+//this is a 4D variable, we need to write 2D slices
+for(var s in thisOplModel.S){//outer slices loop
+for(var r in thisOplModel.C){ //inner slices loop
+    output = "x(:,:,";
+    output += r;
+    output += ","
+    output += s;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var c in thisOplModel.C){
+            output+= thisOplModel.x[t][c][r][s];
+            if(c == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}}
+
+//-------variable b
+output = "b = [";
+    for(var c in thisOplModel.C){
+        for(var r in thisOplModel.C){
+            output+= thisOplModel.b[c][r];
+            if(r == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+//------variable w_dl
+
+output = "w_dl = [";
+for(var c in thisOplModel.C){
+    output+= thisOplModel.w_dl[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable w_ul
+
+output = "w_ul = [";
+for(var c in thisOplModel.C){
+    output+= thisOplModel.w_ul[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+//-------variable f_dl
+output = "f_dl = [";
+    for(var c in thisOplModel.C){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.f_dl[c][d];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+//-------variable f_ul
+output = "f_ul = [";
+    for(var c in thisOplModel.C){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.f_ul[c][d];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+//------variable g_dl
+//this is a 4D variable, we need to write 2D slices
+for(var s in thisOplModel.S){//outer slices loop
+for(var r in thisOplModel.C){ //inner slices loop
+    output = "g_dl(:,:,";
+    output += r;
+    output += ","
+    output += s;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var c in thisOplModel.C){
+            output+= thisOplModel.g_dl[t][c][r][s];
+            if(c == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}}
+
+//------variable g_ul
+//this is a 4D variable, we need to write 2D slices
+for(var s in thisOplModel.S){//outer slices loop
+for(var r in thisOplModel.C){ //inner slices loop
+    output = "g_ul(:,:,";
+    output += r;
+    output += ","
+    output += s;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var c in thisOplModel.C){
+            output+= thisOplModel.g_ul[t][c][r][s];
+            if(c == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}}
+
+//------variable t_dl
+output = "t_dl = [";
+for (var c in thisOplModel.C){
+    output+=thisOplModel.t_dl[c];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable t_ul
+output = "t_ul = [";
+for (var c in thisOplModel.C){
+    output+=thisOplModel.t_ul[c];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable phi
+output = "phi = [";
+for (var c in thisOplModel.C){
+    output+=thisOplModel.phi[c];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable f_dl_x
+//this is a 3D variable, we need to write 2D slices
+for(var d in thisOplModel.C){ //inner slices loop
+    output = "f_dl_x(:,:,";
+    output += d;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var c in thisOplModel.C){
+            output+= thisOplModel.f_dl_x[t][c][d];
+            if(c == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}
+
+//------variable f_ul_x
+//this is a 3D variable, we need to write 2D slices
+for(var d in thisOplModel.C){ //inner slices loop
+    output = "f_ul_x(:,:,";
+    output += d;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var c in thisOplModel.C){
+            output+= thisOplModel.f_ul_x[t][c][d];
+            if(c == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}
+
+//-------variable w_dl_x
+output = "w_dl_x = [";
+    for(var t in thisOplModel.T){
+        for(var c in thisOplModel.C){
+            output+= thisOplModel.w_dl_x[t][c];
+            if(c == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+//-------variable w_ul_x
+output = "w_ul_x = [";
+    for(var t in thisOplModel.T){
+        for(var c in thisOplModel.C){
+            output+= thisOplModel.w_ul_x[t][c];
+            if(c == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+//------variable g_dl_x
+//this is a 4D variable, we need to write 2D slices
+for(var s in thisOplModel.S){//outer slices loop
+for(var r in thisOplModel.C){ //inner slices loop
+    output = "g_dl_x(:,:,";
+    output += r;
+    output += ","
+    output += s;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var c in thisOplModel.C){
+            output+= thisOplModel.g_dl_x[t][c][r][s];
+            if(c == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}}
+
+//------variable g_ul_x
+//this is a 4D variable, we need to write 2D slices
+for(var s in thisOplModel.S){//outer slices loop
+for(var r in thisOplModel.C){ //inner slices loop
+    output = "g_ul_x(:,:,";
+    output += r;
+    output += ","
+    output += s;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var c in thisOplModel.C){
+            output+= thisOplModel.g_ul_x[t][c][r][s];
+            if(c == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}}
+
+//------variable d_min
+output = "d_min = ";
+output+=thisOplModel.d_min;
+output+=";";
+ofile.writeln(output);
+
+ofile.writeln("obj="+cplex.getObjValue()+";")
+
+ofile.close();
+
+}

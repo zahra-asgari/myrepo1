@@ -1,0 +1,50 @@
+//___________________LOGICAL VARIABLES SECTION________________________
+forall(c in C, d in C: d!=c)
+    donor_tx_bh1:
+        z_don_tx[c][d]<=z[c][d];
+forall(c in C, d in C: d!=c)
+    donor_tx_bh2:
+        z_don_tx[c][d]<=y_don[c];
+forall(c in C, d in C: d!=c)
+    donor_tx_bh3:
+        z_don_tx[c][d]>=z[c][d]+y_don[c]-1;
+
+forall(c in C, d in C: d!=c)
+    donor_rx_bh1:
+        z_don_rx[c][d]<=z[c][d];
+forall(c in C, d in C: d!=c)
+    donor_tx_bh2:
+        z_don_rx[c][d]<=y_don[d];
+forall(c in C, d in C: d!=c)
+    donor_tx_bh3:
+        z_don_rx[c][d]>=z[c][d]+y_don[d]-1;
+
+forall(c in C, d in C: d!=c)
+    iab_tx_rx_bh:
+        z_iab[c][d]>=1-z_don_tx[c][d]-z_don_rx[c][d];
+
+forall(t in T, c in C, r in C : r!=c)
+    src_ris_donor1:
+        x_ris_don[t][c][r]<=x_ris[t][c][r];
+forall(t in T, c in C, r in C : r!=c)
+    src_ris_donor2:
+        x_ris_don[t][c][r]<=y_don[c];
+forall(t in T, c in C, r in C : r!=c)
+    src_ris_donor3:
+        x_ris_don[t][c][r]>=x_ris[t][c][r]+y_don[c]-1;
+forall(t in T, c in C, r in C : r!=c)
+    src_ris_iab:
+        x_ris_iab[t][c][r]>=1-x_ris_don[t][c][r];
+
+forall(t in T, c in C, r in C : r!=c)
+    src_sr_donor1:
+        x_sr_don[t][c][r]<=x_sr[t][c][r];
+forall(t in T, c in C, r in C : r!=c)
+    src_sr_donor2:
+        x_sr_don[t][c][r]<=y_don[c];
+forall(t in T, c in C, r in C : r!=c)
+    src_sr_donor3:
+        x_sr_don[t][c][r]>=x_sr[t][c][r]+y_don[c]-1;
+forall(t in T, c in C, r in C : r!=c)
+    src_sr_iab:
+        x_sr_iab[t][c][r]>=1-x_sr_don[t][c][r];

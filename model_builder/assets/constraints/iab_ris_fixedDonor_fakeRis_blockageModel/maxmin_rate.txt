@@ -1,0 +1,5 @@
+//______________________________MAXMIN SECTION_____________________________
+
+    forall(t in T)
+        maxmin_rate:
+          c_min <= sum(c in C, r in C)(g[t][c][r]);

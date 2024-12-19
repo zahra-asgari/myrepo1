@@ -1,0 +1,28 @@
+//______________________________HALF-DUPLEX AND TDM SECTION___________________________   
+    forall(c in C)
+        tx_time_bh:
+            tt_bh[c] == sum(d in C: d != c)(((f[c][d]+f_ul[c][d])/c_don_tx[c][d])*z_don_tx[c][d]+((f[c][d]+f_ul[c][d])/c_don_rx[c][d])*z_don_tx[c][d]+((f[c][d]+f_ul[c][d])/c_iab[c][d])*z_iab[c][d]); 
+
+    forall(c in C)
+        rx_time_bh:
+            tr_bh[c] == sum(d in C: d != c)(((f[d][c]+f_ul[d][c])/c_don_tx[d][c])*z_don_tx[d][c]+((f[d][c]+f_ul[d][c])/c_don_rx[d][c])*z_don_tx[d][c]+((f[d][c]+f_ul[d][c])/c_iab[d][c])*z_iab[d][c]);
+
+    forall(c in C)
+        tx_time_acc_ris:
+            tt_ris[c] == sum(t in T, r in C: c!=r)(max_airtime_dl_ris_donor[t][c][r]*x_ris_don[t][c][r]+max_airtime_dl_ris_iab[t][c][r]*x_ris_iab[t][c][r]);
+
+    forall(c in C)
+        tx_time_acc_ris:
+            tt_sr[c] == sum(t in T, r in C: c!=r)(max_airtime_dl_sr_donor[t][c][r]*x_sr_don[t][c][r]+max_airtime_dl_sr_iab[t][c][r]*x_sr_iab[t][c][r]);
+
+    forall(c in C)    
+        rx_time_acc_ris:
+            tr_ris[c] == sum(t in T, r in C: c!=r)(max_airtime_ul_ris_donor[t][c][r]*x_ris_don[t][c][r]+max_airtime_ul_ris_iab[t][c][r]*x_ris_iab[t][c][r]);
+
+    forall(c in C)
+        tx_time_acc_ris:
+            tr_sr[c] == sum(t in T, r in C: c!=r)(max_airtime_ul_sr_donor[t][c][r]*x_sr_don[t][c][r]+max_airtime_ul_sr_iab[t][c][r]*x_sr_iab[t][c][r]);
+        
+    forall(c in C)
+        half_duplex:
+            tt_sr[c] + tt_ris[c] + tt_sr[c] + tr_bh[c] + tr_ris[c] + tr_sr[c] <= y_iab[c];

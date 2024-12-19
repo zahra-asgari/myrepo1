@@ -1,0 +1,5 @@
+//______________________________K-COVERAGE SECTION___________________________
+    forall(t in T)
+        single_access:
+            sum(c in C, r in C) x[t][c][r] == 1;
+  

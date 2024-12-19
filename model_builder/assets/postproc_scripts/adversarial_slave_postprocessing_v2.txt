@@ -1,0 +1,190 @@
+
+//---------POST PROCESSING----------
+
+execute{
+
+var ofile = new IloOplOutputFile(output_filename);
+var output = "";
+
+var after = new Date();
+var output = "time = "
+output += after.getTime()-temp
+output += ";"
+ofile.writeln(output);
+
+//------variable a
+//this is a 4D variable, we need to write 2D slices
+for(var u in thisOplModel.U){//outer slices loop
+for(var r in thisOplModel.R){ //inner slices loop
+    output = "a(:,:,";
+    output += r;
+    output += ","
+    output += u;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var d in thisOplModel.D){
+            output+= thisOplModel.a[t][d][r][u];
+            if(d == thisOplModel.n_donors){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}}
+
+//------variable x
+//this is a 3D variable, we need to write 2D slices
+for(var r in thisOplModel.R){ //slices loop
+    output = "x(:,:,";
+    output += r;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var d in thisOplModel.D){
+            output+= thisOplModel.x[t][d][r];
+            if(d == thisOplModel.n_donors){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}
+
+//------variable k
+//this is a 4D variable, we need to write 2D slices
+for(var u in thisOplModel.U){//outer slices loop
+for(var r in thisOplModel.R){ //inner slices loop
+    output = "k(:,:,";
+    output += r;
+    output += ","
+    output += u;
+    output += ") = ["
+ 
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var d in thisOplModel.D){
+            output+= thisOplModel.k[t][d][r][u];
+            if(d == thisOplModel.n_donors){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}}
+
+
+//------variable z
+
+    output = "z = [";
+
+    //print slice
+    for(var u in thisOplModel.U){
+        for(var t in thisOplModel.T){
+            output+= thisOplModel.z[u][t];
+            if(t == thisOplModel.n_tp){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+//------variable gamma
+
+output = "gamma = [";
+
+for(var u in thisOplModel.U){
+    output+= thisOplModel.gamma[u];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+
+//------variable a_count_bs
+
+output = "a_count_bs = [";
+
+for(var d in thisOplModel.D){
+    output+= thisOplModel.a_count_bs[d];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+//------variable a_count_ris
+
+output = "a_count_ris = [";
+
+for(var r in thisOplModel.R){
+    output+= thisOplModel.a_count_ris[r];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+//------variable free_bs
+
+output = "free_bs = [";
+
+for(var d in thisOplModel.D){
+    output+= thisOplModel.free_bs[d];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+
+//------variable free_ris
+
+output = "free_ris = [";
+
+for(var r in thisOplModel.R){
+    output+= thisOplModel.free_ris[r];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+//------variable free_src
+
+    output = "free_src = [";
+
+    //print slice
+    for(var d in thisOplModel.D){
+        for(var r in thisOplModel.R){
+            output+= thisOplModel.free_src[d][r];
+            if(r == thisOplModel.n_ris){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+ofile.writeln("obj="+cplex.getObjValue()+";")
+
+ofile.close();
+
+}

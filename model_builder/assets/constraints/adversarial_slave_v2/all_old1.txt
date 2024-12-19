@@ -1,0 +1,45 @@
+    forall(u in U)
+        gamma_set:
+            gamma[u] == sum(t in T, d in D, r in R)(angsep[t][d][r]*a[t][d][r][u]);
+
+    //forall(u in U,t in T, d in D, r in R)
+    //    gamma_set:
+    //        gamma[u] >= angsep[t][d][r]*a[t][d][r][u];
+
+    //forall(u in U, t in T, d in D, r in R, z in U : z!=u)
+    //    k_two:
+    //        //k[t][d][r][u] == (1 - sum(z in U)(a[t][d][r][z]));//*acc_p_mask[t][d][r];
+    //        k[t][d][r][u] >= (1-a[t][d][r][z]);
+
+    forall(t in T)
+        kkk:
+            k[t] == sum(dd in D, rr in R, u in U)(a[t][dd][rr][u]);
+
+    forall(u in U, t in T, d in D, r in R)
+        gamma_max:
+            gamma[u] >= angsep[t][d][r]*(1-k[t]);//*acc_p_mask[t][d][r];
+
+    //forall(u in U, t in T, d in D, r in R)
+    //    acc_mask:
+    //        a[t][d][r][u] <= acc_p_mask[t][d][r];
+
+    //forall(t in T, d in D, r in R)
+    //    no_two_users:
+    //        sum(u in U)(a[t][d][r][u]) <= 1;
+
+
+    forall(t in T)
+        no_t_users:
+            sum(d in D, r in R, u in U)(a[t][d][r][u]) <= 1;
+
+    forall(u in U)
+        position_all:
+            sum(t in T, d in D, r in R)(a[t][d][r][u]) == 1;
+
+    forall(d in D)
+        max_a_bs:
+            sum(t in T, r in R, u in U)(a[t][d][r][u]) <= A_max;
+
+    forall(r in R)
+        max_a_ris:
+            sum(t in T, d in D, u in U)(a[t][d][r][u]) <= A_max;

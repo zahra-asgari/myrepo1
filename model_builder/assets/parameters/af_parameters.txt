@@ -1,0 +1,38 @@
+//----------PARAMETERS----------------
+int n_cs = ...;
+int n_tp = ...;
+
+range C = 1..n_cs;
+range T = 1..n_tp;
+
+float donor_price[C]=...;   //price of installing one donor in c
+float ris_price[C]=...;     //price of installing one ris in c
+float af_price=...;
+float budget=...;           //planning budget
+
+
+int ris_src_act[T][C][C]=...; //one if SRC can be established using RIS
+int af_src_act[T][C][C]=...; //one if SRC can be established using relay
+
+
+//angles
+float cs_tp_angles[C][T]=...;
+float cs_cs_angles[C][C]=...;
+float angle_span=...;
+//int s_angle_ok[T][C][C]=...;
+
+float smallest_angles[T][C][C]=...;
+float cs_cs_dist[C][C]=...;
+float cs_tp_dist[C][C]=...;
+float max_dist=...;
+
+
+//rate
+
+
+float dir_rate[T][C][C]=...;
+float ris_rate[T][C][C]=...;
+float af_rate[T][C][C]=...;
+float max_rate=...;
+float R_out_min=...;
+float R_dir_min=...;

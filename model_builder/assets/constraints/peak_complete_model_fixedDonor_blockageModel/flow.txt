@@ -1,0 +1,28 @@
+//______________________________FLOW SECTION_____________________________
+
+    forall(c in C,d in C)
+        flow_dl_act:
+            f_dl[c][d] <= C_bh[c][d]*z[c][d];
+    forall(c in C,d in C)
+        flow_ul_act:
+            f_ul[d][c] <= C_bh[d][c]*z[c][d];
+
+    forall(c in C)
+        node_flow_balance_dl:
+            n_tp*min_rate_dl*y_don[c] + sum(d in C)(f_dl[d][c] - f_dl[c][d]) - sum(t in T, r in C, s in S)(min_rate_dl*x[t][c][r][s]) == 0;
+    forall(c in C)
+        node_flow_balance_ul:
+            -n_tp*min_rate_ul*y_don[c] + sum(d in C)(f_ul[d][c] - f_ul[c][d]) + sum(t in T, r in C, s in S)(min_rate_ul*x[t][c][r][s]) == 0;
+
+    forall(c in C: c!=fakeris_cs_id)
+        bs_dl_def:
+            t_dl[c] == sum(d in C: (C_bh[c][d] != 0))(f_dl[c][d]/C_bh[c][d]) + sum(d in C: (C_bh[d][c] != 0))(f_dl[d][c]/C_bh[d][c])  + sum(t in T, r in C,s in S: C_src_dl[t][c][r][s]!=0)(min_rate_dl*x[t][c][r][s]/C_src_dl[t][c][r][s]);
+    forall(c in C: c!=fakeris_cs_id)
+        bs_dl_bound:
+            t_dl[c] <= alpha*y_iab[c];
+    forall(c in C: c!=fakeris_cs_id)
+        bs_ul_def:
+            t_ul[c] == sum(d in C: (C_bh[c][d] != 0))(f_ul[c][d]/C_bh[c][d]) + sum(d in C: (C_bh[d][c] != 0))(f_ul[d][c]/C_bh[d][c])  + sum(t in T, r in C,s in S: C_src_ul[t][c][r][s]!=0)(min_rate_ul*x[t][c][r][s]/C_src_ul[t][c][r][s]);
+    forall(c in C: c!=fakeris_cs_id)
+        bs_ul_bound:
+            t_ul[c] <= (1 - alpha)*y_iab[c];

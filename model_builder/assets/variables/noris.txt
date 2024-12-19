@@ -1,0 +1,10 @@
+//-------VARIABLES-------------
+
+dvar boolean y_don[C];
+dvar boolean x_don[T][C];
+
+
+dvar float+ tau_don[T][C] in 0..1;
+
+
+dvar float+ R[T] in 0..max_rate;

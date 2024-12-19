@@ -1,0 +1,5 @@
+int y_iab_par[C]=...;
+int y_ris_par[C]=...;
+int y_ncr_par[C]=...;
+int z_par[C][C]=...;
+int x_par[T][C][C][S]=...;

@@ -1,0 +1,20 @@
+//-------VARIABLES-------------
+
+dvar boolean y_don[C];
+dvar boolean y_rel[C];
+dvar boolean y_iab[C];
+
+dvar boolean x[C][C];
+dvar boolean z[C][C];
+
+dvar boolean s[T][C][C];
+
+dvar float+ f[C][C];
+//dvar float+ w[C];
+
+dvar float+ phi_max[C] in 0..360; 
+dvar float+ phi_min[C] in 0..360;     //ris orientation
+
+dvar float+ avg_lin_len[T];
+
+dvar float+ delta[C] in 0..360;

@@ -1,0 +1,8 @@
+//______________________________SD FLOW SECTION_____________________________
+
+    forall(r in C: r!=fakeris_cs_id)
+        sd_dl_bound:
+            sum(t in T, c in C, s in S:C_sd_dl[t][c][r][s]!=0)(min_rate_dl*x[t][c][r][s]/C_sd_dl[t][c][r][s]) <= alpha*(y_ris[r] + y_ncr[r]);
+    forall(r in C: r!=fakeris_cs_id)
+        sd_ul_bound:
+            sum(t in T, c in C, s in S:C_sd_ul[t][c][r][s]!=0)(min_rate_ul*x[t][c][r][s]/C_sd_ul[t][c][r][s]) <= (1 - alpha)*(y_ris[r] + y_ncr[r]);

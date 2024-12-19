@@ -1,0 +1,8 @@
+//______________________________PEAK SD FLOW SECTION_____________________________
+
+    forall(r in C, t in T: r!=fakeris_cs_id)
+       sd_peak_dl:
+            sum(c in C, s in S:C_sd_dl[t][c][r][s]!=0)(g_dl_x[t][c][r][s]/C_sd_dl[t][c][r][s]) <= alpha*(y_ris[r] + y_ncr[r]) - sum(tau in T,c in C,s in S:C_sd_dl[tau][c][r][s]!=0)((min_rate_dl*x[tau][c][r][s])/C_sd_dl[tau][c][r][s]);
+    forall(r in C, t in T: r!=fakeris_cs_id)
+        sd_peak_ul:
+            sum(c in C, s in S:C_sd_ul[t][c][r][s]!=0)(g_ul_x[t][c][r][s]/C_sd_ul[t][c][r][s]) <= (1 - alpha)*(y_ris[r] + y_ncr[r]) - sum(tau in T,c in C,s in S:C_sd_ul[tau][c][r][s]!=0)((min_rate_ul*x[tau][c][r][s])/C_sd_ul[tau][c][r][s]);

@@ -1,0 +1,16 @@
+//-------VARIABLES-------------
+
+dvar boolean y_don[B];
+dvar boolean y_ris[R];
+dvar boolean y_iab[B];
+
+dvar boolean z[B][B];
+
+dvar boolean x[T][B][R];
+
+dvar float+ f[B][B];
+
+dvar float+ angsep_var[T] in 0..360;
+dvar float+ linlen_var[T] in 0..linlen_norm;
+
+

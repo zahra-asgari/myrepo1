@@ -1,0 +1,4 @@
+//---------OBJECTIVE----------
+
+minimize sum(c in C)(y_don[c]*donor_price + y_iab[c]*iab_price);
+//minimize sum(c in C)(y_don[c] + y_iab[c]);

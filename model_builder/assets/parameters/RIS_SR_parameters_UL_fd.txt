@@ -1,0 +1,55 @@
+//----------PARAMETERS----------------
+int n_cs = ...;
+int n_tp = ...;
+
+range C = 1..n_cs;
+range T = 1..n_tp;
+
+float iab_price=...; //price of installing a IAB node in c
+float ris_price=...;     //price of installing one ris in c
+float sr_price=...;     //price of installing one sr in c
+int ris_budget=...;
+
+float acc_p_mask[T][C][C]=...; 
+float sr_p_mask[T][C][C]=...; 
+float bh_p_mask[C][C]=...; //one if link between c and c' can be established
+
+float d[T]=...; //traffic demand of TP t (in Mbps)
+float d_ul[T]=...; //uplink traffic demand of TP t (in Mbps)
+
+float c_bh[C][C]=...; //backhaul capacities for iab and donor links
+
+//float M_wired=...; //Big-M value for the wired capacity constraint; value must be greater than the sum of the TP demands
+
+float cs_tp_angles[C][T]=...;
+float cs_cs_angles[C][C]=...;
+float smallest_angles[T][C][C]=...;
+float angle_span=...;
+
+float cs_tp_dist[T][C]=...;
+
+float rate_ratio=...;
+
+float angle_norm=...;
+float length_norm=...;
+
+float OF_weight=...; //weight between maximising the angular diversity and minimising the link length in the objective function
+
+float direct_airtime_dl[T][C][C]=...; //airtimes
+float direct_airtime_ul[T][C][C]=...;
+float ris_airtime_dl[T][C][C]=...;
+float ris_airtime_ul[T][C][C]=...;
+float sr_airtime_dl[T][C][C]=...;
+float sr_airtime_ul[T][C][C]=...;
+
+float max_airtime_dl_ris[T][C][C]=...; //max airtimes
+float max_airtime_dl_sr[T][C][C]=...;
+float max_airtime_ul_ris[T][C][C]=...;
+float max_airtime_ul_sr[T][C][C]=...;
+
+float sr_minangle[C][C]=...;
+float sr_maxangle[C][C]=...;
+
+//float min_angle_sep=...;
+
+

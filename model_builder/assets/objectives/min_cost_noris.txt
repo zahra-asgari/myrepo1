@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+minimize sum(c in C)(y_don[c]*donor_price[c]);

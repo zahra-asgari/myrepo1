@@ -1,0 +1,33 @@
+//-------VARIABLES-------------
+
+//DEVICE INSTALLATION
+dvar boolean y_don[C]; //donor installation
+dvar boolean y_iab[C]; //iab node installation
+dvar boolean y_ris[C]; //ris installation
+dvar boolean y_ncr[C]; //ncr installation
+
+//LINK ACTIVATION
+dvar boolean z[C][C]; //backhaul link
+dvar boolean x[T][C][C][S]; //src
+dvar boolean b[C][C]; //exclusive association of sd to bs
+
+//TRAFFIC FLOW
+dvar float+ w_dl[C]; //downlink core traffic
+dvar float+ w_ul[C]; //uplink core traffic
+dvar float+ f_dl[C][C]; //downlink backhaul traffic
+dvar float+ f_ul[C][C]; //uplink backhaul traffic
+dvar float+ g_dl[T][C][C][S]; //downlink access traffic
+dvar float+ g_ul[T][C][C][S]; //uplink access traffic
+
+//RESOURCE SHARING
+dvar float+ t_dl[C] in 0..1; //downlink timeslots ratio
+dvar float+ t_ul[C] in 0..1; //uplink timeslots ratio
+
+//SD ORIENTATION
+dvar float+ phi[C] in 0..360; //sd panel orientation (ris/ncr)
+
+//MAXMIN
+dvar float+ d_min; //demand of worst case ue, total
+dvar float+ d_min_dl; //demand of worst case ue, downlink
+dvar float+ d_min_ul; //demand of worst case ue, uplink
+

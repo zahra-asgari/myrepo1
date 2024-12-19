@@ -1,0 +1,24 @@
+//______________________________LINK ACTIVATION SECTION___________________________
+    forall(t in T, c in C, r in C)
+        direct_assignment_RIS:
+           x_ris[t][c][r] <= acc_p_mask[t][c][r]*y_iab[c];
+
+    forall(t in T, c in C, r in C)
+        RIS_activation:
+            x_ris[t][c][r] <= acc_p_mask[t][c][r]*y_ris[r];
+
+    forall(t in T, c in C, r in C)
+        direct_assignment_SR:
+           x_sr[t][c][r] <= sr_p_mask[t][c][r]*y_iab[c];
+
+    forall(t in T, c in C, r in C)
+        SR_activation:
+            x_sr[t][c][r] <= sr_p_mask[t][c][r]*y_sr[r];
+    
+    forall(c in C, d in C: c != d)
+        backhaul_activation1:
+            z[c][d] <= bh_p_mask[c][d]*y_iab[c];
+
+    forall(c in C, d in C: c != d)
+        backhaul_activation2:
+            z[c][d] <= bh_p_mask[c][d]*y_iab[d];

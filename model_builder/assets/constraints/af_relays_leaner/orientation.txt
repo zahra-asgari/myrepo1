@@ -1,0 +1,12 @@
+//--------------------Orientation section-------
+    forall(t in T, r in C)
+        phi_max_rel:
+            phi_max[r] >= sum(d in C, f in F)(cs_tp_angles[r][t]*s[t][d][r][f]);
+
+    forall(t in T, r in C)
+        phi_min_rel:
+            phi_min[r] <= 360 + sum(d in C, f in F)(s[t][d][r][f]*(cs_tp_angles[r][t]-360));
+            
+    forall(r in C)
+        fov_const:
+            phi_max[r] - phi_min[r] <= 2*angle_span;

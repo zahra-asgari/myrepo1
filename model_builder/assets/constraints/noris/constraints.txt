@@ -1,0 +1,26 @@
+
+    budgeting:
+        sum(c in C)(donor_price[c]*y_don[c])<= budget;
+    
+    forall(t in T)
+        upto1donor:
+            sum(d in C)(x_don[t][d]) <= 1;
+
+    forall(t in T, d in C)
+        tdm_activation:
+            tau_don[t][d] <= L_acc[t][d]*x_don[t][d];
+
+    forall(d in C)
+        tdm_donor:
+            sum(t in T)(tau_don[t][d]) <= y_don[d];
+
+    forall(t in T)
+        rate_donor:
+            R[t] <= sum(d in C)(tau_don[t][d]*donor_rates[t][d]);
+
+    forall(t in T)
+        min_donor_rate:
+            R[t] >= R_out_min;
+
+    fakeris_avoidance:
+            y_don[fakeris_id] <= 0;

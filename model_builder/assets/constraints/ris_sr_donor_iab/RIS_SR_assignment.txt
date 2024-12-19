@@ -1,0 +1,9 @@
+//______________________________RIS AND SR ASSIGNMENT SECTION___________________________
+
+    forall(t in T, c in C, r in C: c!=r)
+        RIS_SR_assignment:
+            x_ris[t][c][r] + x_sr[t][c][r] <= s[c][r];
+
+    forall(r in C)
+        single_RIS_or_SR_per_IAB:
+            sum(c in C)(s[c][r]) <= 1;

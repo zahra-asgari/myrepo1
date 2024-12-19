@@ -1,0 +1,3 @@
+//______________________________BUDGET SECTION_____________________________
+    budgeting_ris:
+        sum(c in C)(y_ris[c]+y_sr[c]) <= sem_budget;

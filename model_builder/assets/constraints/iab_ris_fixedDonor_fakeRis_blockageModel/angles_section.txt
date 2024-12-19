@@ -1,0 +1,15 @@
+//______________________________ANGLES SECTION_____________________________
+
+    forall(t in T, c in C, r in C : (r != fakeris_cs_id && r != c))
+        orientation1:
+            delta[r] >= cs_tp_angles[r][t] - ris_angle_span - (cs_tp_angles[r][t] - ris_angle_span)*(1-x[t][c][r]);
+    forall(t in T, c in C, r in C : r != fakeris_cs_id)
+        orientation2:
+            delta[r] <= cs_tp_angles[r][t] + ris_angle_span + (360 - cs_tp_angles[r][t] - ris_angle_span)*(1-x[t][c][r]);
+    forall(t in T, c in C, r in C : r != fakeris_cs_id)        
+        orientation3:
+            delta[r] >= cs_cs_angles[r][c] - ris_angle_span - (cs_cs_angles[r][c] - ris_angle_span)*(1-x[t][c][r]);
+    forall(t in T, c in C, r in C : r != fakeris_cs_id)
+        orientation4:
+            delta[r] <= cs_cs_angles[r][c] + ris_angle_span + (360 - cs_cs_angles[r][c] - ris_angle_span)*(1-x[t][c][r]);
+

@@ -1,0 +1,15 @@
+//______________________________ANGLES SECTION_____________________________
+
+    forall(t in T, d in C, r in C)
+        orientation1:
+            delta[r] >= cs_tp_angles[r][t] - ris_angle_span - 360*(1-x[t][d][r]);
+    forall(t in T, d in C, r in C)
+        orientation2:
+            delta[r] <= cs_tp_angles[r][t] + ris_angle_span + 360*(1-x[t][d][r]);
+    forall(t in T, d in C, r in C)        
+        orientation3:
+            delta[r] >= cs_cs_angles[r][d] - ris_angle_span - 360*(1-x[t][d][r]);
+    forall(t in T, d in C, r in C)
+        orientation4:
+            delta[r] <= cs_cs_angles[r][d] + ris_angle_span + 360*(1-x[t][d][r]);
+

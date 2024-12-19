@@ -1,0 +1,4 @@
+//______________________________RIS SHARING SECTION_____________________________
+    forall(c in C)
+        RIS_SR_reflected_link_capacity:
+            sum(t in T, r in C: r != c)(rate_ratio*((d[t]/v_nlos[t][c][r]+d_ul[t]/v_nlos_ul[t][c][r])*x_ris[t][c][r]+(d[t]/v_nlos_sr[t][c][r]+d_ul[t]/v_nlos_sr_ul[t][c][r])*x_sr[t][c][r])) <= 1;

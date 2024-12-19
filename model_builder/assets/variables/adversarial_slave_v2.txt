@@ -1,0 +1,14 @@
+//-------VARIABLES-------------
+
+dvar boolean a[T][D][R][U];
+dvar boolean k[T][D][R][U];
+dvar boolean j[T][D][R][U];
+dvar boolean x[T][D][R];
+dvar boolean z[U][T];
+dvar int a_count_bs[D];
+dvar int a_count_ris[R];
+dvar boolean free_bs[D];
+dvar boolean free_ris[R];
+dvar boolean free_src[D][R];
+
+dvar float+ gamma[U];

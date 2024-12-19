@@ -1,0 +1,3 @@
+//______________________________BUDGET SECTION_____________________________
+    budgeting:
+        sum(c in C)(iabnode_price[c]*y_iab[c] + donor_price[c]*y_don[c] + ris_price[c]*y_ris[c]) <= budget;

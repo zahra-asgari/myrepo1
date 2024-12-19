@@ -1,0 +1,42 @@
+//----------PARAMETERS----------------
+int n_cs = ...; //Candidate Sites
+int n_tp = ...; //Test Points
+int n_sd = 2;   //2 Smart Devices, RIS and NCR
+
+range C = 1..n_cs;  //set of CSs
+range T = 1..n_tp;  //set of TPs
+range S = 1..n_sd;  //set of SDs
+
+float ris_price=...;    //price of installing one RIS in c
+float ncr_price=...;    //price of installing one NCR in c
+float iab_price=...;    //price of installing one IAB node in c
+float budget=...;       //planning budget
+
+int delta_bh[C][C] = ...;       //binary parameter checking if a backahul link can be phisically activated
+int delta_src[T][C][C][S]=...;  //binary parameter checking if a SRC can be phisically activated
+
+float min_rate_dl=...; //minimum downlink demand per user
+float min_rate_ul=...; //minimum uplink demand per user
+
+float C_bh[C][C]=...;           //capacity of a backhaul link
+float C_src_dl[T][C][C][S]=...; //average capacity of a downlink SRC
+float C_src_ul[T][C][C][S]=...; //average capacity of an uplink SRC
+float C_sd_dl[T][C][C][S]=...; //average capacity of a downlink SD-only link (when it is convenient to use it)
+float C_sd_ul[T][C][C][S]=...; //average capacity of an uplink SD-only link (when it is convenient to use it)
+
+//angles
+float cs_tp_angles[C][T]=...;   //angle between a CS and a TP
+float cs_cs_angles[C][C]=...;   //angle between two CSs
+float ncr_minangle[C][C]=...;   //min angle of NCR
+float ncr_maxangle[C][C]=...;   //max angle of NCR
+float max_angle_span=...;       //field of view of a RIS
+
+
+float M=...; //big M pertaining the maximum incoming/outcoming network traffic
+
+float alpha=...; //fraction of frame dedicated to downlink
+
+int donor_cs_id=...;
+int fakeris_cs_id=...;
+int ris_id=...;
+int ncr_id=...;

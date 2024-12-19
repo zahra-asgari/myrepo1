@@ -1,0 +1,2 @@
+minimize sum(t in T)
+    P_unsatisfied[t];

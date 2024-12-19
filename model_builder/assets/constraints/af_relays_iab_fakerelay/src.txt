@@ -1,0 +1,11 @@
+    forall(d in C)
+        hd_tdm:
+            sum(t in T, r in C: r != d)(s[t][d][r]*D/C_acc[t][d][r]) + sum(j in C: j != d)(f[d][j]/C_bh[d][j]) + sum(j in C: j != d)(f[j][d]/C_bh[j][d]) <= 1;
+
+
+    forall(t in T)
+        tp_cov:
+            sum(d in C, r in C)(s[t][d][r]) == 1;
+
+    //onedonor:
+    //    sum(c in C)(y_don[c]) >= 1;

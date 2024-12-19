@@ -1,0 +1,13 @@
+//______________________________EXISTENCE SECTION___________________________
+    
+    forall(c in C)
+        IAB_RIS_dichotomy:
+            y_iab[c]+y_ris[c] <= 1;
+
+    forall(c in C)
+        donor_condition:
+            y_don[c] <= y_iab[c];
+
+        single_donor:
+            sum(c in C)(y_don[c]) >= 1;
+            //sum(c in C)(y_don[c]) == 1;

@@ -1,0 +1,12 @@
+    forall(c in B,d in B)
+        flow_act:
+            f[c][d] <= C_bh[c][d]*z[c][d];
+    forall(c in B)
+        node_flow_balance:
+            n_tp*min_rate*y_don[c] + sum(d in B)(f[d][c] - f[c][d]) - sum(t in T, r in R)(min_rate*x[t][c][r]) == 0;
+    forall(c in B)
+        bs_tdm:
+            sum(d in B)(f[c][d]/C_bh[c][d]) + sum(t in T, r in R)(max_airtime[t][c][r]*x[t][c][r]) + sum(d in B)(f[d][c]/C_bh[d][c]) <= y_iab[c];
+    forall(r in R)
+        ris_tdm:
+            sum(t in T, d in B)(x[t][d][r]*ris_airtime[t][d][r]) <= y_ris[r];

@@ -1,0 +1,9 @@
+//------------FLOW BALANCE
+
+    forall(c in C, d in C)
+        flow_bh_capacity:
+            f[c][d] <= z[c][d]*C_bh[c][d];
+
+    forall(c in C)
+        flow_balance:
+           (n_tp*D*y_don[c]) + sum(d in C)(f[d][c] - f[c][d]) - sum(t in T,r in C)(D*s[t][c][r]) == 0;

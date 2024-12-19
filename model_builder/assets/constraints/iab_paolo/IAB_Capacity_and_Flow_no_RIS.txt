@@ -1,0 +1,25 @@
+//______________________________CAPACITY AND FLOW SECTION___________________________
+
+    forall(c in C)
+        flow_conservation_primary:
+            w[c] + sum(d in C: d != c)(f[d][c] - f[c][d]) - sum(t in T, r in C: c!=r)(d[t]*x[t][c][r]) == 0;
+
+    forall(c in C)
+        flow_conservation_secondary:
+            sum(r in C: c!=r)g[r][c] - sum(t in T,r in C:c!=r)rate_ratio*d[t]*x[t][r][c] == 0;
+
+    forall(t in T, c in C, r in C: c!=r)
+        secondary_link:
+            g[c][r] >= rate_ratio*d[t]*x[t][c][r];
+
+    forall(c in C, d in C: c != d)
+        backhaul_capacity:
+            f[c][d] + g[c][d]<= z[c][d]*u[c][d];
+
+    forall(t in T, c in C)
+        access_capacity:
+            sum(r in C: c!=r)(d[t]*x[t][c][r] + rate_ratio*d[t]*x[t][r][c])<= v[t][c];
+
+    forall(c in C)
+        wired_capacity:
+            w[c] <= M_wired*y_don[c];

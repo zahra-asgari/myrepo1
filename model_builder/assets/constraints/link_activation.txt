@@ -1,0 +1,7 @@
+//______________________________LINK ACT SECTION___________________________
+    forall(t in T, d in C, r in C)
+        link_act1:
+            s[t][d][r] <= L_acc[t][r]*L_bh[r][d]*y_ris[r];
+    forall(t in T, d in C, r in C)
+        link_act2:
+            s[t][d][r] <= x_don[t][d];

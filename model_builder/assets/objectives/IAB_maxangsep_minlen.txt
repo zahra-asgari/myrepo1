@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+maximize (OF_weight*sum(t in T)(min_angle[t]/angle_norm) - (1 - OF_weight)*sum(t in T)(avg_lin_len[t]/length_norm));

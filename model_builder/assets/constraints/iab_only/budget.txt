@@ -1,0 +1,4 @@
+//______________________________TOPOLOGY SECTION_____________________________
+
+budget:
+sum(c in C)(y_iab[c]) <= iab_budget;

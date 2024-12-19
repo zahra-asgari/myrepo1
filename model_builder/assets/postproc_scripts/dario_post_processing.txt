@@ -1,0 +1,211 @@
+//---------POST PROCESSING----------
+
+execute{
+
+var ofile = new IloOplOutputFile(output_filename);
+var output = "";
+
+var after = new Date();
+var output = "time = "
+output += after.getTime()-temp
+output += ";"
+ofile.writeln(output);
+
+//------variable y_don
+
+output = "y_don = [";
+
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_don[c];
+    output+= ";";
+}  
+output += "];"
+ofile.writeln(output);
+
+//------variable y_iab
+
+output = "y_iab = [";
+
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_iab[c];
+    output+= ";";
+}  
+output += "];"
+ofile.writeln(output);
+
+//------variable y_ris
+
+output = "y_ris = [";
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_ris[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable y_sr
+
+output = "y_sr = [";
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_sr[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable z
+output = "z = [";
+for(var c in thisOplModel.C){
+    for(var d in thisOplModel.C){
+        output+= thisOplModel.z[c][d]
+        if (d == thisOplModel.n_cs){
+            output += ";"
+        } else {
+            output += " "
+        }
+    }
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable s
+output = "s = [";
+for(var c in thisOplModel.C){
+    for(var r in thisOplModel.C){
+        output+= thisOplModel.s[c][r]
+        if (r == thisOplModel.n_cs){
+            output += ";"
+        } else {
+            output += " "
+        }
+    }
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable w
+
+output = "w = [";
+
+for(var c in thisOplModel.C){
+    output+= thisOplModel.w[c];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+//------variable f
+output = "f = [";
+for(var c in thisOplModel.C){
+    for(var d in thisOplModel.C){
+        output+= thisOplModel.f[c][d]
+        if (d == thisOplModel.n_cs){
+            output += ";"
+        } else {
+            output += " "
+        }
+    }
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable min_angle
+output = "min_angle = [";
+for (var t in thisOplModel.T){
+    output+=thisOplModel.min_angle[t];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable avg_lin_len
+output = "avg_lin_len = [";
+for (var t in thisOplModel.T){
+    output+=thisOplModel.avg_lin_len[t];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable x_ris
+//this is a 3D variable, we need to write 2D slices
+for(var r in thisOplModel.C){ //slices loop
+    output = "x_ris(:,:,";
+    output += r;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.x_ris[t][d][r];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}
+
+//------variable x_sr
+//this is a 3D variable, we need to write 2D slices
+for(var r in thisOplModel.C){ //slices loop
+    output = "x_sr(:,:,";
+    output += r;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.x_sr[t][d][r];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}
+
+//------variable delta
+output = "delta = [";
+for (var c in thisOplModel.C){
+    output+=thisOplModel.delta[c];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+
+//------variable tt
+
+output = "tt = [";
+
+for(var c in thisOplModel.C){
+    output+= thisOplModel.tt[c];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+//------variable tr
+
+output = "tr = [";
+
+for(var c in thisOplModel.C){
+    output+= thisOplModel.tr[c];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+ofile.close();
+
+}

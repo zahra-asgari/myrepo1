@@ -1,0 +1,34 @@
+//______________________________PEAK FLOW SECTION_____________________________
+
+    forall(t in T,c in C,d in C)
+        peak_flow_dl_act:
+            f_dl_x[t][c][d] <= C_bh[c][d]*z[c][d];
+    forall(t in T,c in C,d in C)
+        peak_flow_ul_act:
+            f_ul_x[t][d][c] <= C_bh[d][c]*z[c][d];
+
+    forall(c in C,t in T)
+        node_peak_flow_balance_dl:
+            w_dl_x[t][c] + sum(d in C)(f_dl_x[t][d][c] - f_dl_x[t][c][d]) - sum(r in C, s in S)(g_dl_x[t][c][r][s]) == 0;
+    forall(c in C, t in T)
+        node_peak_flow_balance_ul:
+            -w_ul_x[t][c] + sum(d in C)(f_ul_x[t][d][c] - f_ul_x[t][c][d]) + sum(r in C, s in S)(g_ul_x[t][c][r][s]) == 0;
+
+    forall(t in T, c in C, r in C, s in S)
+        maximum_peak_dl_demand:
+            g_dl_x[t][c][r][s] <= C_src_dl[t][c][r][s] * x[t][c][r][s];
+    forall(t in T, c in C, r in C, s in S)
+        maximum_peak_ul_demand:
+            g_ul_x[t][c][r][s] <= C_src_ul[t][c][r][s] * x[t][c][r][s];
+
+    forall(t in T, c in C)
+        peak_donor_total_traffic:
+            w_dl_x[t][c] + w_ul_x[t][c]<= M * y_don[c];
+
+    forall(t in T, c in C: c!=fakeris_cs_id)
+        bs_peak_dl:
+            sum(d in C: (C_bh[c][d] != 0))(f_dl_x[t][c][d]/C_bh[c][d]) + sum(d in C: (C_bh[d][c] != 0))(f_dl_x[t][d][c]/C_bh[d][c])  + sum(r in C,s in S: C_src_dl[t][c][r][s]!=0)(g_dl_x[t][c][r][s]/C_src_dl[t][c][r][s])<= alpha*y_iab[c] -t_dl[c];
+
+    forall(t in T, c in C: c!=fakeris_cs_id)
+        bs_peak_ul:
+            sum(d in C: (C_bh[c][d] != 0))(f_ul_x[t][c][d]/C_bh[c][d]) + sum(d in C: (C_bh[d][c] != 0))(f_ul_x[t][d][c]/C_bh[d][c])  + sum(r in C,s in S: C_src_ul[t][c][r][s]!=0)(g_ul_x[t][c][r][s]/C_src_ul[t][c][r][s]) <= (1 - alpha)*y_iab[c] - t_ul[c];

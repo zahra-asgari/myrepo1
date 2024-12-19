@@ -1,0 +1,3 @@
+forall(t in T, d in C, r in C : r!=fakeris_id)
+    angle_ok:
+        s[t][d][r] <= s_angle_ok[t][d][r];

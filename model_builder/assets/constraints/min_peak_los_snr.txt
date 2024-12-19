@@ -1,0 +1,3 @@
+    forall(t in T, d in C)        
+        minSnrPeakLos:
+            x_don[t][d]*min_snr_peak[t] <= snr_peak_los[t][d];

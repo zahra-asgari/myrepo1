@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+maximize sum(t in T, c in C)(snr_peak_outage[t][c]);

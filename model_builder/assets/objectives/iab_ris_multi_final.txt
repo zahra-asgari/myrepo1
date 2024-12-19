@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+maximize (angsep_emphasis*sum(t in T)(angsep_var[t]/angsep_norm) - (1 - angsep_emphasis)*sum(t in T)(linlen_var[t]/linlen_norm));

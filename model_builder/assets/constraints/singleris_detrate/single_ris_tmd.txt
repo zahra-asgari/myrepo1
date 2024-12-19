@@ -1,0 +1,63 @@
+//______________________________SINGLERIS TIMESHARE-TDM SECTION____________
+
+    forall(t in T, d in C)
+        ts_don_act:
+            tau_don[t][d] <= x_don[t][d];
+
+    forall(t in T, d in C, r in C)
+        ts_ris_act:
+            tau_ris[t][d][r] <= s[t][d][r];
+
+    //forall(t in T, d in C, r in C)
+    //    equal_ts:
+    //        tau_ris[t][d][r] >= tau_don[t][d] - (1-s[t][d][r]);
+
+    forall(t in T, d in C)
+        equal_ts:
+            tau_don[t][d] >= sum(r in C)(tau_ris[t][d][r]);
+
+    forall(d in C)
+        don_ts:
+            sum(t in T)(tau_don[t][d]) <= 1;
+
+    forall(r in C)
+        ris_ts:
+            sum(t in T, d in C)(tau_ris[t][d][r]) <= 1;
+
+    //forall(t in T)
+    //    diopoi:
+    //        sum(r in C, d in C) s[t][d][r]*los_rate[t][d][r] >= R[t];
+
+    //forall(t in T)
+    //    los_rate_lb:
+    //        R[t] <= sum(d in C, r in C)(los_rate[t][d][r]*s[t][d][r]);
+
+    //forall(t in T)
+    //    out_rate_lb:
+    //        R_out[t] <= sum(d in C, r in C)(outage_rate[t][d][r]*s[t][d][r]);
+
+
+    //forall(t in T, d in C, r in C)
+    //    los_rate_constraint:
+    //        R[t] <= tau_don[t][d]*los_rate[t][d][r] + max_rate*(1-s[t][d][r]);
+
+    //forall(t in T, d in C, r in C)
+    //    out_rate_constraint:
+    //       R_out[t] <= tau_don[t][d]*outage_rate[t][d][r] + max_rate*(1-s[t][d][r]);
+
+    //forall(t in T)
+    //    min_r_our:
+    //        R_out[t] >= R_out_min;
+
+    forall(t in T)
+        rate_los_cons:
+            R[t] <= sum(d in C, r in C)(tau_ris[t][d][r]*los_rate[t][d][r]);
+
+    forall(t in T)
+        rate_lout_cons:
+            R_out_min <= sum(d in C, r in C)(tau_ris[t][d][r]*outage_rate[t][d][r]);
+
+
+    //R[t]<=(sum d r)max_rate*s[t][d][r];
+   //R[t]<=(sum d r)tau_ris[t][d][r]*outage_rate[t][d][r]
+   // R[t]>=(sum d r)tau_ris[t][d][r]*outage_rate[t][d][r] - max_rate(1-s[t][d][r])

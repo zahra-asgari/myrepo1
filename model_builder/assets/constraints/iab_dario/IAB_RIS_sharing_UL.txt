@@ -1,0 +1,16 @@
+//______________________________RIS SHARING SECTION_____________________________
+    //forall(c in C)
+        //RIS_reflected_link_time:
+            //sum(t in T, r in C: r != c)(rate_ratio*(d[t]/v_nlos[t][c][r])*x[t][c][r]) <= 1;
+      
+    //forall(t in T, c in C, r in C: c != r)
+        //RIS_link_capacity_unexceedance:
+            //x[t][c][r]*(d[t]/v_los[t][c][r] - rate_ratio*(d[t]/v_nlos[t][c][r])) >= 0;
+
+    forall(c in C)
+        RIS_reflected_link_time_ul:
+            sum(t in T, r in C: r != c)(rate_ratio*(d[t]/v_nlos[t][c][r]+d_ul[t]/v_nlos_ul[t][c][r])*x[t][c][r]) <= 1;
+      
+    //forall(t in T, c in C, r in C: c != r)
+        //RIS_link_capacity_unexceedance_ul:
+            //x[t][c][r]*(d[t]/v_los[t][c][r] + d_ul[t]/v_los_ul[t][c][r]- rate_ratio*(d[t]/v_nlos[t][c][r] + d_ul[t]/v_nlos_ul[t][c][r])) >= 0;

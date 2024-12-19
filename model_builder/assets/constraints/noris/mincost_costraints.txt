@@ -1,0 +1,13 @@
+    forall(t in T)
+        upto1donor:
+            sum(d in C)(x_don[t][d]) == 1;
+
+    forall(t in T, d in C)
+        x_don[t][d] <= y_don[d]*L_acc[t][d];
+
+    forall(d in C)
+        donor_capacity:
+            sum(t in T)( (R_out_min/donor_rates[t][d])*x_don[t][d] ) <= y_don[d];
+
+    fakeris_avoidance:
+            y_don[fakeris_id] <= 0;

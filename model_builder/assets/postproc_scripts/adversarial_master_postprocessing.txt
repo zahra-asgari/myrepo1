@@ -1,0 +1,88 @@
+
+//---------POST PROCESSING----------
+
+execute{
+
+var ofile = new IloOplOutputFile(output_filename);
+var output = "";
+
+var after = new Date();
+var output = "time = "
+output += after.getTime()-temp
+output += ";"
+ofile.writeln(output);
+
+//------variable y_don
+
+output = "y_don = [";
+
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_don[c];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+//------variable y_ris
+
+output = "y_ris = [";
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_ris[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+
+//------variable avg_angsep
+
+output = "avg_angsep = [";
+output += thisOplModel.min_avg_angsep;
+output += "];"
+ofile.writeln(output);
+
+
+
+
+//------variable x
+//this is a 3D variable, we need to write 2D slices
+for(var p in thisOplModel.P){//outer slices loop
+for(var r in thisOplModel.C){ //inner slices loop
+    output = "x(:,:,";
+    output += r;
+    output += ","
+    output += p;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.x[t][d][r][p];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}}
+
+//------variable delta
+output = "delta = [";
+for (var c in thisOplModel.C){
+    output+=thisOplModel.delta[c];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+
+
+ofile.writeln("obj="+cplex.getObjValue()+";")
+
+ofile.close();
+
+}

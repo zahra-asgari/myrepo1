@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+minimize (sum(t in T)((avg_lin_len[t]/n_tp)/max_linlen)*linlen_emphasis + (1-linlen_emphasis)*(sum(c in C)(y_iab[c]*iab_price + y_rel[c]*rel_price)/B));

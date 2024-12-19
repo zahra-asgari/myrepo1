@@ -1,0 +1,8 @@
+//______________________________FIXED DEVICES SECTION_____________________________
+
+        fixed_donor:
+            y_don[donor_cs_id] >= 1;
+
+        fixed_fakeris:
+            y_ris[fakeris_cs_id] >= 1;
+

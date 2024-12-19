@@ -1,0 +1,17 @@
+//______________________________MAXMIN SECTION_____________________________
+
+    forall(t in T)
+        maxmin_rate_dl:
+          d_min_dl <= sum(c in C, r in C,s in S)g_dl[t][c][r][s]/min_rate_dl;
+
+    forall(t in T)
+        maxmin_rate_ul:
+          d_min_ul <= sum(c in C, r in C,s in S)g_ul[t][c][r][s]/min_rate_ul;
+
+    forall(t in T)
+        maxmin_rate_total_1:
+          d_min <= d_min_dl;
+
+    forall(t in T)
+        maxmin_rate_total_2:
+          d_min <= d_min_ul;

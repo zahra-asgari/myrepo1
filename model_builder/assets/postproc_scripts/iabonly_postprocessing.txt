@@ -1,0 +1,98 @@
+
+//---------POST PROCESSING----------
+
+execute{
+
+var ofile = new IloOplOutputFile(output_filename);
+var output = "";
+
+var after = new Date();
+var output = "time = "
+output += after.getTime()-temp
+output += ";"
+ofile.writeln(output);
+
+//------variable y_don
+
+output = "y_don = [";
+
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_don[c];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+
+//------variable y_iab
+
+output = "y_iab = [";
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_iab[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+//-------variable x
+output = "x = [";
+    for(var c in thisOplModel.C){
+        for(var t in thisOplModel.T){
+            output+= thisOplModel.x[c][t];
+            if(t == thisOplModel.n_tp){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+//-------variable z
+output = "z = [";
+    for(var c in thisOplModel.C){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.z[c][d];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+//-------variable f
+output = "f = [";
+    for(var c in thisOplModel.C){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.f[c][d];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+//------variable w
+
+//output = "w = [";
+//for(var c in thisOplModel.C){
+//    output+= thisOplModel.w[c];
+//    output+= ";";
+//}
+//output += "];"
+//ofile.writeln(output);
+
+
+ofile.writeln("obj="+cplex.getObjValue()+";")
+
+ofile.close();
+
+}

@@ -1,0 +1,24 @@
+
+//-------VARIABLES-------------
+
+dvar boolean y_don[C]; //donor installation
+dvar boolean y_iab[C]; //IAB node installation
+dvar boolean z[C][C]; //backhaul link activation
+dvar boolean s[C][C]; //RIS/SR assignment variable
+
+dvar float+ w[C]; //traffic from wired to donor (in bits)
+dvar float+ f[C][C]; //traffic on downlink backhaul link (in bits)
+
+dvar float+ min_angle[T] in 0..180;  //min angle separation
+
+dvar float+ avg_lin_len[T]; //average link len
+
+dvar boolean y_ris[C]; //RIS installation
+dvar boolean y_sr[C]; //SR installation
+
+dvar boolean x_ris[T][C][C]; // TP-CS-RIS assignment
+dvar boolean x_sr[T][C][C]; // TP-CS-SR assignment
+dvar float+ delta[C] in 0..360;      //ris orientation
+
+dvar float+ tt[C] in 0..1; // time assigned to transmission
+dvar float+ tr[C] in 0..1;// time assigned to reception

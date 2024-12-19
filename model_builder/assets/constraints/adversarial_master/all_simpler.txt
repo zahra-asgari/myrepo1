@@ -1,0 +1,29 @@
+    forall(c in C)
+        one_tech:
+            y_don[c] + y_ris[c] <= 1;
+
+    forall(t in T, p in P)
+        one_src:
+            sum(d in C, r in C : r != d)(x[t][d][r][p]) == 1;
+
+    forall(t in T, d in C, r in C, p in P)
+        src_don_act:
+            x[t][d][r][p] <= acc_p_mask[t][d][r][p]*y_don[d];
+
+    forall(t in T, d in C, r in C, p in P)
+        src_ris_act:
+            x[t][d][r][p] <= acc_p_mask[t][d][r][p]*y_ris[r];
+
+    forall(t in T, d in C, r in C, p in P)
+        src_cap:
+            x[t][d][r][p]*max_airtime[t][d][r][p] <= 1;
+
+    forall(d in C,p in P)
+        bs_max_ass:
+            sum(t in T, r in C)(x[t][d][r][p]) <= A_max;
+
+    forall(r in C,p in P)
+        ris_max_ass:
+            sum(t in T, d in C)(x[t][d][r][p]) <= A_max;
+
+

@@ -1,0 +1,42 @@
+//______________________________SINGLERIS TIMESHARE-TDM SECTION____________
+
+    forall(t in T, d in C)
+        ts_don_act:
+            tau_don[t][d] <= x_don[t][d];
+
+    forall(t in T, d in C, r in C)
+        ts_ris_act:
+            tau_ris[t][d][r] <= s[t][d][r];
+
+    forall(t in T, d in C)
+        equal_ts:
+            sum(r in C)(tau_ris[t][d][r]) <= tau_don[t][d];
+
+    forall(d in C)
+        don_ts:
+            sum(t in T)(tau_don[t][d]) <= 1;
+
+    forall(r in C)
+        ris_ts:
+            sum(t in T, d in C)(tau_ris[t][d][r]) <= 1;
+
+    forall(t in T)
+        ris_assisted_rate:
+            R[t] <= sum(d in C, r in C)(tau_ris[t][d][r]*(base_rate[t][d] + additional_ris_rate[t][d][r]));
+
+    forall(t in T)
+        min_rate:
+            R[t] >= R_out_min;
+
+    //forall(t in T, d in C)
+    //    not_assisted_rate:
+    //        R[t]/base_rate[t][d] <= tau_don[t][d] + max_rate*(1-x_don[t][d]+sum(r in C)(s[t][d][r]));
+
+    //forall(t in T, d in C, r in C)
+    //    ris_assisted_rate:
+    //        R[t]/(base_rate[t][d] + additional_ris_rate[t][d][r]) <= tau_don[t][d] + max_rate*(2-x_don[t][d] - s[t][d][r]);
+
+    //forall(t in T, d in C, r in C)
+    //    equal_ts:
+    //        tau_ris[t][d][r] >= tau_don[t][d] - (1-s[t][d][r]);
+

@@ -1,0 +1,21 @@
+//-------VARIABLES-------------
+
+dvar boolean y_don[C];
+dvar boolean y_ris[C];
+dvar boolean x_don[T][C];
+dvar boolean s[T][C][C];
+
+dvar float+ delta[C] in 0..360;      //ris orientation
+dvar float+ min_angle[T] in 0..180;  //min angle separation
+
+dvar float+ tau_don[T][C] in 0..1;
+dvar float+ tau_ris[T][C][C] in 0..1;
+
+dvar boolean z[T][C][M];
+dvar boolean o[T][C][M];
+
+dvar float+ R[T] in 0..max_rate;
+dvar float+ R_out[T] in 0..max_rate;
+dvar float+ R_out_max[T] in 0..max_rate;
+
+dvar float+ avg_lin_len[T]; //average link len

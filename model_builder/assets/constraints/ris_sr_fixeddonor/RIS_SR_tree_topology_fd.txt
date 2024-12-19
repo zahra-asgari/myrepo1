@@ -1,0 +1,6 @@
+//______________________________TREE TOPOLOGY AND DOWNLINK ENFORCEMENT SECTION___________________________
+
+    forall(c in C)
+        single_parent:
+            sum(d in C: d!=c)z[d][c] <= 1;
+            

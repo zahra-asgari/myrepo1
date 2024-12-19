@@ -1,0 +1,23 @@
+//______________________________TOPOLOGY SECTION___________________________
+    forall(c in C)
+        construction:
+            y_don[c] + y_ris[c] <= 1;    
+
+    forall(t in T)
+        sum(d in C, r in C) (s[t][d][r]) == 1;
+
+    forall(t in T, d in C, r in C)
+        s[t][d][r] <= L_acc[t][d]*L_acc[t][r]*L_bh[d][r];
+
+//______________________________SINGLERIS TIMESHARE-TDM SECTION____________
+
+    forall(d in C)
+        capacity_don:
+            sum(t in T, r in C)( (R_out_min/rates[t][d][r])*s[t][d][r] ) <= y_don[d];
+
+    //forall(d in C)
+    //        sum(t in T, r in C)(s[t][d][r]) <= y_don[d];
+
+    forall(r in C : r != fakeris_id)
+        capacity_ris:
+            sum(t in T, d in C)( (R_out_min/rates[t][d][r])*s[t][d][r] ) <= y_ris[r];

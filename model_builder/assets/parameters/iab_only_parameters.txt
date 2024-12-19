@@ -1,0 +1,25 @@
+//----------PARAMETERS----------------
+int n_cs = ...;
+int n_tp = ...;
+
+range C = 1..n_cs;
+range T = 1..n_tp;
+
+float donor_price=...;   //price of installing one donor in c
+float iab_price=...;
+float iab_budget=...;
+
+
+int bh_p_mask[C][C]=...;
+int acc_p_mask[C][T]=...;
+
+
+//capacity
+float C_bh[C][C]=...;
+float D=...;
+float C_acc[C][T]=...;
+
+//distances 
+float tp_cs_dist[T][C]=...;
+float max_linlen=...;
+float linlen_emphasis=...;

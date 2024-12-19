@@ -1,0 +1,9 @@
+//______________________________TREE TOPOLOGY AND DOWNLINK ENFORCEMENT SECTION___________________________
+
+    forall(c in C, i in I)
+        single_parent:
+            sum(d in C: d!=c)z[d][c][i] <= 1 - y_don[c];
+
+
+    
+            

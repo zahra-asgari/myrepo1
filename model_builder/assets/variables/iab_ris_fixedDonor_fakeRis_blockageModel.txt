@@ -1,0 +1,24 @@
+//-------VARIABLES-------------
+
+dvar boolean y_don[C];
+dvar boolean y_ris[C];
+dvar boolean y_iab[C];
+
+dvar boolean z[C][C];
+
+dvar boolean x[T][C][C];
+
+dvar float+ f[C][C];
+
+dvar float+ delta[C] in 0..360;
+
+dvar float+ c_min;
+
+dvar float+ g[T][C][C];
+
+dvar float+ w[C];
+
+dvar float+ t_tx[C] in 0..1;
+
+dvar float+ t_rx[C] in 0..1;
+

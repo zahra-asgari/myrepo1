@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+maximize sum(t in T, c in C)(snr_avg_nlos[t][c]);

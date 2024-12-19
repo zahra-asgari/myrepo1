@@ -1,0 +1,59 @@
+//----------PARAMETERS----------------
+int n_cs = ...;
+int n_tp = ...;
+
+range C = 1..n_cs;
+range T = 1..n_tp;
+
+
+float iab_price=...; //price of installing a IAB node in c
+
+float L_acc[T][C]=...;
+float L_bh[C][C]=...;
+//float acc_p_mask[T][C][C]=...; 
+//float sr_p_mask[T][C][C]=...; 
+//float bh_p_mask[C][C]=...; //one if link between c and c' can be established
+
+float d[T]=...; //traffic demand of TP t (in Mbps)
+float d_ul[T]=...; //uplink traffic demand of TP t (in Mbps)
+
+float u[C][C]=...; //number of bits contained in a frame on a specific backhaul link, based on its MCS
+
+//float M_wired=...; //Big-M value for the wired capacity constraint; value must be greater than the sum of the TP demands
+
+
+float cs_tp_angles[C][T]=...;
+float cs_cs_angles[C][C]=...;
+float smallest_angles[T][C][C]=...;
+float angle_span=...;
+
+float cs_tp_dist[T][C]=...;
+
+float rate_ratio=...;
+
+float angle_norm=...;
+float length_norm=...;
+
+float OF_weight=...; //weight between maximising the angular diversity and minimising the link length in the objective function
+
+float ris_price=...;     //price of installing one ris in c
+float sr_price=...;     //price of installing one sr in c
+
+float v_los[T][C][C]=...; //rate for downlink direct communications
+float v_nlos[T][C][C]=...; //rate for downlink RIS aided communications
+float v_nlos_sr[T][C][C]=...; //rate for downlink SR aided communications
+
+float v_los_ul[T][C][C]=...; //rate for uplink direct communications
+float v_nlos_ul[T][C][C]=...; //rate for uplink RIS aided communications
+float v_nlos_sr_ul[T][C][C]=...; //rate for uplink SR aided communications
+
+float max_airtime_dl_ris=...;
+float max_airtime_dl_sr=...;
+float max_airtime_ul_ris=...;
+float max_airtime_ul_sr=...;
+
+float angle_ok[T][C][C]=...; //for now, same for RIS and SR
+
+//float min_angle_sep=...;
+
+int ris_budget=...;

@@ -1,0 +1,24 @@
+//______________________________TOPOLOGY SECTION___________________________
+    forall(c in C)
+        construction:
+            y_don[c] + y_ris[c] <= 1;    
+    
+    forall(c in C)
+        ris_upgrade:
+            y_rel[c] <= y_ris[c];
+
+    forall(r in C, t in T)
+        one_bs_per_ris:
+            sum(d in C)(s[t][d][r]) <= n_tp*y_ris[r];
+
+    forall(t in T)
+        one_src_per_tp:
+            sum(d in C, r in C)(s[t][d][r]) <= 1;
+
+    forall(d in C)
+        src_bs_act:
+            sum(t in T, r in C)(s[t][d][r]) <= n_tp*y_don[d];
+
+    forall(t in T, d in C, r in C)
+        src_pruning:
+            s[t][d][r] <= ris_src_act[t][d][r]*(1-y_rel[r]) + af_src_act[t][d][r]*y_rel[r];

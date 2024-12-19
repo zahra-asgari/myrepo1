@@ -1,0 +1,14 @@
+//______________________________ANGLES&LEN SECTION_____________________________
+
+    forall(t in T, r in C : r!= fakerel_id)
+        orientation1:
+            delta[r] >= cs_tp_angles[r][t] - angle_span - 360*(1-sum(d in C)(s[t][d][r]));
+    forall(t in T, r in C : r!= fakerel_id)
+        orientation2:
+            delta[r] <= cs_tp_angles[r][t] + angle_span + 360*(1-sum(d in C)(s[t][d][r]));
+    //forall(t in T, d in C, r in C : r!= fakerel_id)        
+    //    orientation3:
+    //        delta[r] >= cs_cs_angles[r][d] - angle_span - 360*(1-s[t][d][r]);
+    //forall(t in T, d in C, r in C : r!= fakerel_id)
+    //    orientation4:
+    //        delta[r] <= cs_cs_angles[r][d] + angle_span + 360*(1-s[t][d][r]);

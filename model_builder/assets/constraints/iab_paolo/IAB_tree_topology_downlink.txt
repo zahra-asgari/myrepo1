@@ -1,0 +1,13 @@
+//______________________________TREE TOPOLOGY AND DOWNLINK ENFORCEMENT SECTION___________________________
+        tree:
+            //sum(c in C, d in C: c != d)z[c][d] == sum(j in C)y_iab[j] -sum(j in C)y_don[j];
+            sum(c in C, d in C: c != d)z[c][d] == sum(j in C)y_iab[j] - 1;
+
+    forall(c in C, d in C: c != d)
+        single_direction:
+        z[c][d] + z[d][c] <= 1;
+
+    forall(c in C)
+        single_parent:
+            sum(d in C: d!=c)z[d][c] <= 1 - y_don[c];
+            

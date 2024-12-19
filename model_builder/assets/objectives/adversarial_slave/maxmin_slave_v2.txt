@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+minimize sum(u in U)(gamma[u])/max_tp;

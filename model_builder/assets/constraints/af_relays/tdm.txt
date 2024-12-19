@@ -1,0 +1,23 @@
+    forall(t in T, d in C, r in C)
+        tdm_act:
+            tau[t][d][r] <= s[t][d][r];
+
+    forall(r in C)
+        ris_tdm:
+            sum(t in T, d in C)(tau[t][d][r]) <= y_ris[r];
+
+    forall(d in C)
+        bs_tdm:
+            sum(t in T, r in C)(tau[t][d][r]) <= y_don[d];
+
+    forall(t in T)
+        direct_minrate:
+            sum(d in C, r in C)(tau[t][d][r] * dir_rate[t][d][r]) >= R_dir_min;
+
+    forall(t in T, r in C)
+        back_minrate_1:
+            sum(d in C)(tau[t][d][r] * ris_rate[t][d][r]) >= sum(d in C)(s[t][d][r]*R_out_min) - max_rate*(1-y_rel[r]);
+
+    forall(t in T, r in C)
+        back_minrate_2:
+            sum(d in C)(tau[t][d][r] * af_rate[t][d][r]) >= sum(d in C)(s[t][d][r]*R_out_min) - max_rate*y_rel[r];

@@ -1,0 +1,33 @@
+//----------PARAMETERS----------------
+int n_cs = ...;
+int n_tp = ...;
+
+range C = 1..n_cs;
+range T = 1..n_tp;
+
+float ris_price=...;     //price of installing one ris in c
+float iab_price=...;
+float budget=...;        //planning budget
+
+int bh_p_mask[C][C] = ...;
+int src_p_mask[T][C][C]=...;
+
+float C_bh[C][C]=...;
+float C_src[T][C][C]=...;
+float C_ris[T][C][C]=...;
+float C_fullris[T][C][C]=...;
+float min_rate=...;
+
+//angles
+float cs_tp_angles[C][T]=...;
+float cs_cs_angles[C][C]=...;
+float ncr_minangle[C][C]=...;
+float ncr_maxangle[C][C]=...;
+float ris_angle_span=...;
+float linlen[T][C]=...;
+
+
+float M_max=...;
+
+int donor_cs_id=...;
+int fakeris_cs_id=...;

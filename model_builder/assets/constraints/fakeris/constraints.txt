@@ -1,0 +1,27 @@
+//______________________________TOPOLOGY SECTION___________________________
+    forall(c in C)
+        construction:
+            y_don[c] + y_ris[c] <= 1;    
+
+    forall(t in T)
+        sum(d in C, r in C) (s[t][d][r]) <= 1;
+
+//______________________________SINGLERIS TIMESHARE-TDM SECTION____________
+    forall(t in T, d in C, r in C)
+        tdm_activation:
+            tau_ris[t][d][r] <= s[t][d][r]*L_acc[t][d]*L_acc[t][r]*L_bh[d][r];
+
+    forall(d in C)
+        donor_tdm:
+            sum(t in T, r in C)( tau_ris[t][d][r] ) <= y_don[d];
+    
+    forall(r in C : r !=fakeris_id)
+        ris_tdm:
+            sum(t in T, d in C)( tau_ris[t][d][r] ) <= y_ris[r];
+
+    forall(t in T)
+        ris_assisted_rate:
+            R[t] <= sum(d in C, r in C)( rates[t][d][r]*tau_ris[t][d][r] );
+    forall(t in T)
+        min_rate:
+            R[t] >= R_out_min;

@@ -1,0 +1,71 @@
+//______________________________FLOW SECTION_____________________________
+
+    forall(c in C,d in C)
+        flow_act:
+            f[c][d] <= C_bh[c][d]*z[c][d];
+    forall(c in C)
+        node_flow_balance:
+            min_rate*n_tp*y_don[c] + sum(d in C)(f[d][c] - f[c][d]) - sum(t in T, r in C)(min_rate*x[t][c][r]) == 0;
+
+    forall(c in C: c!=fakeris_cs_id)
+        bs_tx:
+            t_tx[c] == sum(d in C: (C_bh[c][d] != 0))(f[c][d]/C_bh[c][d]) + sum(t in T, r in C:C_src[t][c][r]!=0)((min_rate*x[t][c][r])/C_src[t][c][r]);
+
+    forall(c in C: c!=fakeris_cs_id)
+        bs_rx:
+            t_rx[c] == sum(d in C: (C_bh[d][c] != 0))(f[d][c]/C_bh[d][c]);
+
+    forall(c in C: c!=fakeris_cs_id)
+        bs_tdm:
+            t_tx[c] + t_rx[c] <= y_iab[c];
+
+//    forall(t in T, c in C, r in C:r!=fakeris_cs_id)
+  //      ris_policy:
+    //        min_rate*x[t][c][r] <= C_ris[t][c][r];
+
+    forall(t in T, c in C, r in C)
+        access_capacity:
+            min_rate*x[t][c][r] <= C_src[t][c][r];
+
+    forall(r in C: r != fakeris_cs_id)
+        ris_tdm:
+            sum(t in T, c in C: c != r && C_ris[t][c][r]!=0)((min_rate*x[t][c][r])/C_fullris[t][c][r]) <= y_ris[r];
+
+//______________________________MAX FLOW SECTION_____________________________
+
+    forall(c in C, t in T)
+        node_flow_balance_extra:
+            w_x[t][c] + sum(d in C)(f_x[t][d][c] - f_x[t][c][d]) - sum(r in C)(g_x[t][c][r]) == 0;
+
+    forall(c in C,d in C,t in T)
+        flow_act_extra:
+            f_x[t][c][d] <= C_bh[c][d]*z[c][d] - f[c][d];
+          
+   // forall(t in T, c in C)
+     //   maximum_demand_extra_fake:
+       //     g_x[t][c][fakeris_cs_id] <= (C_src[t][c][fakeris_cs_id] - min_rate) * x[t][c][fakeris_cs_id];
+           
+    
+  //  forall(t in T, c in C, r in C:r!=fakeris_cs_id)
+    //    maximum_demand_extra_real:
+      //      g_x[t][c][r] <= (C_ris[t][c][r] - min_rate) * x[t][c][r];
+    
+   forall(t in T, c in C, r in C)
+        maximum_demand_extra:
+            g_x[t][c][r] <= (C_src[t][c][r] - min_rate) * x[t][c][r];
+       
+    forall(c in C,t in T)
+        donor_extra_traffic:
+            w_x[t][c] <= M_max * y_don[c];
+    forall(c in C,t in T: c!=fakeris_cs_id)
+        access_extra_tdm:
+            sum(r in C:C_src[t][c][r]!=0)(g_x[t][c][r]/C_src[t][c][r]) + sum(d in C:(C_bh[d][c] != 0))(f_x[t][d][c]/C_bh[d][c]) <= y_iab[c] - t_tx[c] - t_rx[c];
+
+    forall(c in C,t in T: c!=fakeris_cs_id)
+        backhaul_extra_tdm:
+            sum(d in C:(C_bh[d][c] != 0))(f_x[t][d][c]/C_bh[d][c]) + sum(d in C:(C_bh[c][d] != 0))(f_x[t][c][d]/C_bh[c][d]) <= y_iab[c] - t_tx[c] - t_rx[c];
+
+    forall(r in C,t in T : r != fakeris_cs_id)
+        ris_extra_tdm:
+            sum(c in C: c != r && C_ris[t][c][r]!=0)(g_x[t][c][r]/C_fullris[t][c][r]) <= y_ris[r] - sum(tau in T, c in C: c != r && C_ris[tau][c][r]!=0)((min_rate*x[tau][c][r])/C_fullris[tau][c][r]);
+

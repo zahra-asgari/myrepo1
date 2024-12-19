@@ -1,0 +1,3 @@
+        fixed_donor:
+            y_don[donor_cs_id] == 1;
+

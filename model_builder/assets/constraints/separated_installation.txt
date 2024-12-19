@@ -1,0 +1,10 @@
+//______________________________SEPARATED INSTALLATION SECTION___________________________
+
+    forall(c in C)
+        donor_only:
+            y_don[c] <= don_here[c];
+
+    forall(c in C)
+        ris_only:
+            y_ris[c] <= ris_here[c];
+

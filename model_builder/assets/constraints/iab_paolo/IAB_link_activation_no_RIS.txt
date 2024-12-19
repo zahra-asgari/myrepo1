@@ -1,0 +1,17 @@
+//______________________________LINK ACTIVATION SECTION___________________________
+
+    forall(t in T, c in C, d in C: c!=d)
+        primary_assignment:
+           x[t][c][d] <= L_acc[t][c]*y_iab[c];
+
+    forall(t in T, c in C,d in C: c!=d)
+        secondary_assignment:
+            x[t][c][d] <= L_acc[t][d]*y_iab[d];
+
+    forall(c in C, d in C: c != d)
+        backhaul_activation1:
+            z[c][d] <= L_bh[c][d]*y_iab[c];
+
+    forall(c in C, d in C: c != d)
+        backhaul_activation2:
+            z[c][d] <= L_bh[c][d]*y_iab[d];

@@ -1,0 +1,8 @@
+//______________________________RIS/SR SHARING SECTION_____________________________
+forall(r in C)
+    RIS_tdm:
+        sum(t in T, c in C: c != r)((ris_airtime_dl_donor[t][c][r]+ris_airtime_ul_donor[t][c][r])*x_ris_don[t][c][r]+(ris_airtime_dl_iab[t][c][r]+ris_airtime_ul_iab[t][c][r])*x_ris_iab[t][c][r]) <= y_ris[r];
+
+forall(r in C)
+    SR_tdm:
+        sum(t in T, c in C: c != r)((sr_airtime_dl_donor[t][c][r]+sr_airtime_ul_donor[t][c][r])*x_sr_don[t][c][r]+(sr_airtime_dl_iab[t][c][r]+sr_airtime_ul_iab[t][c][r])*x_sr_iab[t][c][r]) <= y_sr[r];

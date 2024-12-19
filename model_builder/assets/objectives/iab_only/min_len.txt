@@ -1,0 +1,4 @@
+//---------OBJECTIVE----------
+
+minimize sum(t in T)(avg_lin_len[t])/n_tp;
+//minimize sum(c in C)(y_don[c] + y_iab[c]);

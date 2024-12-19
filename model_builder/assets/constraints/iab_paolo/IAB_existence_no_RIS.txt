@@ -1,0 +1,9 @@
+//______________________________EXISTENCE SECTION___________________________
+
+    forall(c in C)
+        donor_condition:
+            y_don[c] <= y_iab[c];
+
+        single_donor:
+           // sum(c in C)(y_don[c]) >= 1;
+            sum(c in C)(y_don[c]) == 1;

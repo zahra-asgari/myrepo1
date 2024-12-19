@@ -1,0 +1,20 @@
+//______________________________ANGLES SECTION_____________________________
+
+    forall(t in T, c in C, r in C : r != fakeris_cs_id)
+        SD_orientation1:
+            phi[r] >= cs_tp_angles[r][t] - max_angle_span - (cs_tp_angles[r][t] - max_angle_span)*(1-sum(s in S)x[t][c][r][s]);
+    forall(t in T, c in C, r in C : r != fakeris_cs_id)
+        SD_orientation2:
+            phi[r] <= cs_tp_angles[r][t] + max_angle_span + (360 - cs_tp_angles[r][t] - max_angle_span)*(1-sum(s in S)x[t][c][r][s]);
+    forall(t in T, c in C, r in C : r != fakeris_cs_id)        
+        RIS_orientation3:
+            phi[r] >= cs_cs_angles[r][c] - max_angle_span - (cs_cs_angles[r][c] - max_angle_span)*(1-x[t][c][r][ris_id]);
+    forall(t in T, c in C, r in C : r != fakeris_cs_id)
+        RIS_orientation4:
+            phi[r] <= cs_cs_angles[r][c] + max_angle_span + (360 - cs_cs_angles[r][c] - max_angle_span)*(1-x[t][c][r][ris_id]);
+    forall(t in T, c in C, r in C : r != fakeris_cs_id)        
+       NCR_orientation3:
+            phi[r] >= ncr_minangle[r][c] - (ncr_minangle[r][c])*(1-x[t][c][r][ncr_id]);
+    forall(t in T, c in C, r in C : r != fakeris_cs_id)
+        NCR_orientation4:
+            phi[r] <= ncr_maxangle[r][c] + (360 - ncr_maxangle[c][r])*(1-x[t][c][r][ncr_id]);

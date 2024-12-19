@@ -1,0 +1,3 @@
+//-------VARIABLES-------------
+
+dvar boolean x[T][D][R];

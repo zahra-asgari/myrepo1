@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+minimize sum(t in T, d in C, r in C)(x[t][d][r]*angsep[t][d][r]);

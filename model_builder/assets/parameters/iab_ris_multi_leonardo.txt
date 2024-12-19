@@ -1,0 +1,30 @@
+//----------PARAMETERS----------------
+int n_bs = ...;
+int n_ris = ...;
+int n_tp = ...;
+
+int donor_id=...;
+
+range B = 1..n_bs;
+range R = 1..n_ris;
+range T = 1..n_tp;
+
+float donor_price=...;   //price of installing one donor in c
+float ris_price=...;     //price of installing one ris in c
+float iab_price=...;
+float budget=...;        //planning budget
+
+float bh_p_mask[B][B] = ...;
+float src_p_mask[T][B][R]=...;
+
+float angsep[T][B][R]=...;
+float linlen[T][B][R]=...;
+
+float C_bh[B][B]=...;
+float min_rate=...;
+float max_airtime[T][B][R]=...;
+float ris_airtime[T][B][R]=...;
+
+float angsep_norm=...;
+float linlen_norm=...;
+float angsep_emphasis=...;

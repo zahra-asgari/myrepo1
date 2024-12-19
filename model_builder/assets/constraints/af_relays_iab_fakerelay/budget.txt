@@ -1,0 +1,5 @@
+//______________________________BUDGET SECTION___________________________
+
+
+    budget:
+        sum(c in C)(y_iab[c]*iab_price + y_rel[c]*rel_price) <= B;

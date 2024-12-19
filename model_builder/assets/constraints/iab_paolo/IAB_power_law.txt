@@ -1,0 +1,12 @@
+//______________________________POWER LAW SECTION_____________________________
+    forall(t in T, d in C, r in C: d != r)
+        RIS_sharing_bound:
+            timeshare_ris[t][d][r] <= x[t][d][r];
+
+    forall(t in T, c in C, r in C: c != r)
+        RIS_sharing_link:
+            timeshare_ris[t][c][r] >= d[t]/v_los[t][c][r] - (1 - x[t][c][r]);
+
+    forall(r in C)
+        RIS_sharing_total:
+            sum(t in T, d in C)timeshare_ris[t][d][r] <= y_ris[r];

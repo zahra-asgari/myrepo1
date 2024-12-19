@@ -1,0 +1,3 @@
+    forall(t in T)
+        k_cov_ris:
+            sum(d in C, r in C)(s[t][d][r]) >= K;

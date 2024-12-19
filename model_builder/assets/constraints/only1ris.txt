@@ -1,0 +1,7 @@
+    forall(t in T)
+        only1ris:
+            sum(d in C, r in C)(s[t][d][r]) <= 1;
+
+    forall(t in T)
+        only1donor:
+            sum(d in C)(x_don[t][d]) <=1;

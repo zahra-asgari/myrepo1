@@ -1,0 +1,10 @@
+//______________________________ANGLES&LEN SECTION_____________________________
+
+
+    forall(t in T, d in C, r in C: d != r)
+        ang_sep:
+            min_angle[t] <= smallest_angles[t][d][r] + 180*(1 - x[t][d][r]);
+
+    forall(t in T)
+        avg_len:
+            avg_lin_len[t] >= 0.5*(sum(c in C, d in C: c!=d)(x[t][c][d]*(cs_tp_dist[t][c] + cs_tp_dist[t][d])));

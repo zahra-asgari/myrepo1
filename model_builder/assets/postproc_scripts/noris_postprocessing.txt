@@ -1,0 +1,72 @@
+//---------POST PROCESSING----------
+
+execute{
+
+var ofile = new IloOplOutputFile(output_filename);
+var output = "";
+
+var after = new Date();
+var output = "time = "
+output += after.getTime()-temp
+output += ";"
+ofile.writeln(output);
+
+//------variable y_don
+
+output = "y_don = [";
+
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_don[c];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+//------variable x_don
+output = "x_don = [";
+for(var t in thisOplModel.T){
+    for(var c in thisOplModel.C){
+        output+= thisOplModel.x_don[t][c]
+        if (c == thisOplModel.n_cs){
+            output += ";"
+        } else {
+            output += " "
+        }
+    }
+}
+output += "];"
+ofile.writeln(output);
+
+
+//------variable tau_don
+output = "tau_don = [";
+for(var t in thisOplModel.T){
+    for(var c in thisOplModel.C){
+        output+= thisOplModel.tau_don[t][c]
+        if (c == thisOplModel.n_cs){
+            output += ";"
+        } else {
+            output += " "
+        }
+    }
+}
+output += "];"
+ofile.writeln(output);
+
+
+//------variable R
+output = "R = [";
+for (var t in thisOplModel.T){
+    output+=thisOplModel.R[t];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+
+ofile.writeln("obj="+cplex.getObjValue()+";")
+
+ofile.close();
+
+}

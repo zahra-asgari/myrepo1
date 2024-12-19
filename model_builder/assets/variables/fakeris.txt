@@ -1,0 +1,12 @@
+//-------VARIABLES-------------
+
+dvar boolean y_don[C];
+dvar boolean y_ris[C];
+dvar boolean s[T][C][C];
+
+dvar float+ delta[C] in 0..360;      //ris orientation
+
+dvar float+ tau_ris[T][C][C] in 0..1;
+
+
+dvar float+ R[T] in 0..max_rate;

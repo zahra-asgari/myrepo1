@@ -1,0 +1,8 @@
+//______________________________RIS SHARING SECTION_____________________________
+    forall(r in C)
+        RIS_reflected_link_time:
+            sum(t in T, d in C)x[t][d][r]* rate_ratio*d[t]/v_nlos[t][c][r] <= 1;
+      
+    forall(t in T, c in C, r in C: c != r)
+        RIS_link_capacity_unexceedance:
+            x[t][d][r]*(d[t]/v_los[t][c][r]) - rate_ratio*x[t][d][r]*(d[t]/v_nlos[t][c][r]) >= 0;

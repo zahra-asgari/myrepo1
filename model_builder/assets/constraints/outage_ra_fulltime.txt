@@ -1,0 +1,13 @@
+//______________________________OUTAGE RA SECTION FULLTIME_________________
+
+    forall(t in T, d in C)
+        one_mcs_out:
+            sum(m in M)(o[t][d][m]) == x_don[t][d];
+
+    forall(t in T, d in C, m in M)
+        mcs_sel_out:
+            sum(r in C)(gamma[t][d][r]*s[t][d][r]) >= pwr_thr[m]*o[t][d][m];
+
+    forall(t in T, d in C, m in M)
+        mcs_rate_out:
+            R_out[t] <= rate_mcs[m]*o[t][d][m];

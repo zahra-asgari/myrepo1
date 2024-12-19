@@ -1,0 +1,125 @@
+
+//---------POST PROCESSING----------
+
+execute{
+
+var ofile = new IloOplOutputFile(output_filename);
+var output = "";
+
+var after = new Date();
+var output = "time = "
+output += after.getTime()-temp
+output += ";"
+ofile.writeln(output);
+
+//------variable y_don
+
+output = "y_don = [";
+
+for(var c in thisOplModel.B){
+    output+= thisOplModel.y_don[c];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+//------variable y_iab
+
+output = "y_iab = [";
+for(var c in thisOplModel.B){
+    output+= thisOplModel.y_iab[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable y_ris
+
+output = "y_ris = [";
+for(var c in thisOplModel.R){
+    output+= thisOplModel.y_ris[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+
+//-------variable z
+output = "z = [";
+    for(var c in thisOplModel.B){
+        for(var d in thisOplModel.B){
+            output+= thisOplModel.z[c][d];
+            if(d == thisOplModel.n_bs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+//------variable x
+//this is a 3D variable, we need to write 2D slices
+for(var r in thisOplModel.R){ //inner slices loop
+    output = "x(:,:,";
+    output += r;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var d in thisOplModel.B){
+            output+= thisOplModel.x[t][d][r];
+            if(d == thisOplModel.n_bs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}
+
+//-------variable f
+output = "f = [";
+    for(var c in thisOplModel.B){
+        for(var d in thisOplModel.B){
+            output+= thisOplModel.f[c][d];
+            if(d == thisOplModel.n_bs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+
+
+
+//------variable angsep_var
+output = "angsep_var = [";
+for (var t in thisOplModel.T){
+    output+=thisOplModel.angsep_var[t];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable linlen_var
+output = "linlen_var = [";
+for (var t in thisOplModel.T){
+    output+=thisOplModel.linlen_var[t];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+
+ofile.writeln("obj="+cplex.getObjValue()+";")
+
+ofile.close();
+
+}

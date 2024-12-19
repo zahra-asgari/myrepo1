@@ -1,0 +1,5 @@
+//-----------FAKERIS SECTION-------------------
+
+//always a ris in fakeris id
+fakeris1:
+    y_ris[fakeris_id] >= 1;

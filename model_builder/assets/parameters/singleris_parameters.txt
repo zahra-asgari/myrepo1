@@ -1,0 +1,6 @@
+//----------SINGLERIS PARAMETERS----------------
+float base_rate[T][C]=...;
+float additional_ris_rate[T][C][C]=...;
+float los_rate[T][C][C]=...;
+float outage_rate[T][C][C]=...;
+

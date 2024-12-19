@@ -1,0 +1,23 @@
+//______________________________ANGLES&LEN SECTION_____________________________
+
+    forall(t in T, d in C, r in C)
+        orientation1:
+            delta[r] >= cs_tp_angles[r][t] - angle_span - 360*(1-s[t][d][r]);
+    forall(t in T, d in C, r in C)
+        orientation2:
+            delta[r] <= cs_tp_angles[r][t] + angle_span + 360*(1-s[t][d][r]);
+    forall(t in T, d in C, r in C)        
+        orientation3:
+            delta[r] >= cs_cs_angles[r][d] - angle_span - 360*(1-s[t][d][r]);
+    forall(t in T, d in C, r in C)
+        orientation4:
+            delta[r] <= cs_cs_angles[r][d] + angle_span + 360*(1-s[t][d][r]);
+    forall(t in T, d in C, r in C: d!=r)
+        angle_sep1:
+            min_angle[t] <= smallest_angles[t][d][r] + 360*(1-s[t][d][r]);
+    forall(t in T, d in C, r in C, k in C:k!=r)
+        angle_sep2:
+            min_angle[t] <= smallest_angles[t][r][k] + 360*(2-s[t][d][r]-s[t][d][k]);
+    forall(t in T)
+        avg_len:
+            avg_lin_len[t] >= 1/(K+1)*(sum(d in C, r in C)(s[t][d][r]*(cs_tp_dist[t][d]+cs_cs_dist[d][r])) + sum(d in C)(x_don[t][d]*cs_tp_dist[t][d]));

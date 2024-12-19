@@ -1,0 +1,19 @@
+//______________________________TIMESHARE SECTION__________________________
+    forall(c in C)
+        timeshare_max1:
+            sum(t in T)(timeshare_don[t][c]) == y_don[c];
+    forall(c in C)
+        timeshare_max2:
+            sum(t in T, d in C)(timeshare_ris[t][d][c]) == y_ris[c];
+
+    forall(t in T, d in C)    
+        timeshare_activation1:
+            timeshare_don[t][d] <= x_don[t][d];
+
+    forall(t in T, d in C, r in C)
+        timeshare_activation2:
+            timeshare_ris[t][d][r] <= s[t][d][r];
+
+    forall(t in T, d in C, r in C)
+        timeshare_ris_bound:
+            timeshare_ris[t][d][r] <= timeshare_don[t][d];

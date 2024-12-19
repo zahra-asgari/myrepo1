@@ -1,0 +1,13 @@
+//______________________________RA SECTION_____________________________
+
+    forall(t in T, d in C)
+        one_mcs:
+            sum(m in M)(z[t][d][m]) == x_don[t][d];
+
+    forall(t in T, d in C, m in M)
+        mcs_sel:
+            sum(r in C)(gamma[t][d][r]*s[t][d][r]) + sum(r in C)(theta[t][d][r]*s[t][d][r]*L_acc[t][d]) + phi[t][d]*L_acc[t][d]*x_don[t][d] >= pwr_thr[m]*z[t][d][m];
+
+    forall(t in T, d in C, m in M)
+        mcs_rate:
+            R[t]/rate_mcs[m] <= tau_don[t][d] + max_rate*(1-z[t][d][m]);

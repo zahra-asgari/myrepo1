@@ -1,0 +1,46 @@
+    forall(t in T, d in D, r in R)
+        k_set:
+            k[t][d][r] == 1 - sum(u in U)(a[t][d][r][u]);
+
+    forall(t in T, d in D, r in R)
+        one_u_per_a:
+            sum(u in U)(a[t][d][r][u]) <= 1;
+    
+    forall(u in U)
+        gamma_set:
+            gamma[u] == sum(t in T, d in D, r in R)(a[t][d][r][u]*angsep[t][d][r]);
+
+    forall(u in U, t in T, d in D, r in R)
+        gamma_lim:
+            gamma[u] >= angsep[t][d][r]*k[t][d][r];
+
+    forall(u in U)
+        select_one_pos:
+            sum(t in T, d in D, r in R)(a[t][d][r][u]) == 1;
+
+    
+    forall(t in T)
+        one_src_per_t:
+            sum(d in D, r in R)(x[t][d][r]) <= 1;
+
+    forall(t in T)
+        z_diocan:
+            sum(u in U)(z[u][t]) <=1;
+
+    forall(t in T, u in U)
+        a_diocan:
+            sum(d in D, r in R)(a[t][d][r][u]) == z[u][t];
+
+    forall(d in D)
+        bs_max:
+            sum(t in T, r in R)(x[t][d][r]) <= A_max;
+
+    forall(r in R)
+        ris_max:
+            sum(t in T, d in D)(x[t][d][r]) <= A_max;
+    
+
+    //forall(t in T, d in D, r in R, u in U)
+    //    x_a_link:
+    //        a[t][d][r][u] <= x[t][d][r];
+

@@ -1,0 +1,29 @@
+//----------PARAMETERS----------------
+int n_cs = ...;
+int n_tp = ...;
+int n_ps = ...;
+
+range C = 1..n_cs;
+range T = 1..n_tp;
+range P = 1..n_ps;
+
+float donor_price=...;   //price of installing one donor in c
+float ris_price=...;     //price of installing one ris in c
+float budget=...;           //planning budget
+
+
+float acc_p_mask[T][C][C][P]=...;
+
+
+//angles
+float cs_tp_angles[C][T][P]=...;
+float cs_cs_angles[C][C]=...;
+float angsep[T][C][C][P]=...;
+float angle_span=...;
+float min_angsep=...;
+
+//airtimes 
+float max_airtime[T][C][C][P]=...;
+float ris_airtime[T][C][C][P]=...;
+
+int A_max = ...;

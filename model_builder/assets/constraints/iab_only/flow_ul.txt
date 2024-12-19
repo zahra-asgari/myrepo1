@@ -1,0 +1,26 @@
+//______________________________FLOW SECTION_____________________________
+
+    forall(c in C)
+        flow_balance_dl:
+           (n_tp*D_dl*y_don[c]) + sum(d in C)(f_dl[d][c] - f_dl[c][d]) - sum(t in T)(D_dl*x[c][t]) == 0;
+
+    forall(c in C)
+        flow_balance_ul:
+           (n_tp*D_ul*y_don[c]) + sum(d in C)(f_ul[d][c] - f_ul[c][d]) - sum(t in T)(D_ul*x[c][t]) == 0;
+
+    forall(c in C, d in C)
+        bh_cap_dl:
+            f_dl[c][d] <= z[c][d]*C_bh[c][d];
+
+    forall(c in C, d in C)
+        bh_cap_ul:
+            f_ul[c][d] <= z[c][d]*C_bh[c][d];
+
+    //forall(c in C, t in T)
+    //    acc_cap:
+    //        D*x[c][t] <= C_acc[c][t];
+
+    forall(c in C)
+        tdm:
+            sum(d in C : d != c)((f_ul[c][d]+f_dl[c][d])/C_bh[c][d]) + sum(d in C : d != c)((f_dl[d][c]+f_ul[d][c])/C_bh[d][c]) + sum(t in T)(x[c][t]*D_dl/C_acc[c][t] + x[c][t]*D_ul/C_acc[c][t]) <= y_iab[c];
+    

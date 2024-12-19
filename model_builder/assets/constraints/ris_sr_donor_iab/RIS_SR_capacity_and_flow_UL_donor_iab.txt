@@ -1,0 +1,12 @@
+//______________________________CAPACITY AND FLOW SECTION___________________________
+    forall(c in C)
+        flow_conservation_downlink:
+            n_tp*y_don[c]*d[1] + sum(d in C: d != c)(f[d][c] - f[c][d]) - sum(t in T,r in C: c!=r)(d[t]*(x_ris[t][c][r]+x_sr[t][c][r])) == 0;
+
+    forall(c in C)
+        flow_conservation_uplink:
+            -n_tp*y_don[c]*d_ul[1] + sum(d in C: d != c)(f_ul[d][c] - f_ul[c][d]) + sum(t in T,r in C: c!=r)(d_ul[t]*(x_ris[t][c][r]+x_sr[t][c][r])) == 0;
+
+    forall(c in C, d in C: c != d)
+        backhaul_capacity:
+            f[c][d]+f_ul[c][d] <= c_iab[c][d]*z_iab[c][d]+c_don_tx[c][d]*z_don_tx[c][d]+c_don_rx[c][d]*z_don_rx[c][d];

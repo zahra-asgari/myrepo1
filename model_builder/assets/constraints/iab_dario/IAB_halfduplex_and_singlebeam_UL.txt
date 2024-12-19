@@ -1,0 +1,16 @@
+//______________________________HALF-DUPLEX AND SINGLE-BEAM SECTION___________________________
+    //forall(c in C)
+        //tx_time:
+            //tt[c] == sum(d in C: d != c)((f[c][d]+f_ul[c][d])/u[c][d]) + sum(t in T, r in C: c!=r)(((d[t]/v_los[t][c][r])+(d_ul[t]/v_los_ul[t][c][r]))*x[t][c][r]);
+    
+    forall(c in C)
+        tx_time:
+            tt[c] == sum(d in C: d != c)((f[c][d]+f_ul[c][d])/u[c][d]) + sum(t in T, r in C: c!=r)((max_airtime_dl+max_airtime_ul)*x[t][c][r]);
+
+    forall(c in C)
+        rx_time:
+            tr[c] == sum(d in C: d != c)(f[d][c]/u[d][c]+f_ul[c][d]/u[c][d]);
+
+    forall(c in C)
+        half_duplex:
+            tt[c] + tr[c] <= 1;

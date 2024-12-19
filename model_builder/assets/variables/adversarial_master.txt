@@ -1,0 +1,9 @@
+//-------VARIABLES-------------
+
+dvar boolean y_don[C];
+dvar boolean y_ris[C];
+dvar boolean x[T][C][C][P];
+
+dvar float+ delta[C] in 0..360;      //ris orientation
+
+dvar float+ min_avg_angsep in 0..360; 

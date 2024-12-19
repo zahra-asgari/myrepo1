@@ -1,0 +1,45 @@
+//______________________________TOPOLOGY SECTION___________________________
+    forall(c in C)
+        construction:
+            y_iab[c] + y_rel[c] <= 1;
+    forall(c in C)
+        upgrade:
+            y_don[c] <= y_iab[c];
+
+    forall(r in C : r != fakerel_id)
+        one_bs_per_rel:
+            sum(d in C)(x[d][r]) <= y_rel[r];
+
+    forall(t in T, d in C, r in C)
+        src_bs_relay:
+            s[t][d][r] <= x[d][r];
+
+    forall(c in C, d in C)
+        bh_link_act_1:
+            z[c][d] <= y_iab[c];
+
+    forall(c in C, d in C)
+        bh_link_act_2:
+            z[c][d] <= y_iab[d];
+
+    forall(c in C, r in C)
+        rel_link_act_1:
+            x[c][r] <= y_iab[c];
+
+    forall(c in C, r in C)
+        rel_link_act_2:
+            x[c][r] <= y_rel[r];
+
+    forall(c in C)
+        tree:
+            sum(d in C)(z[d][c]) <= 1 - y_don[c];
+
+    fakerel:
+        y_rel[fakerel_id] >= 1;
+        
+    forall(t in T)
+        avg_len:
+            avg_lin_len[t] >= sum(d in C, r in C : r != fakerel_id)(s[t][d][r]*tp_cs_dist[t][r]) + sum (d in C)(s[t][d][fakerel_id]*tp_cs_dist[t][d]);
+
+ 
+

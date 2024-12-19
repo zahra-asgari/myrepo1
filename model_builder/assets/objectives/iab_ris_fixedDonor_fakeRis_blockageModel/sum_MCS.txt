@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+maximize sum(t in T, c in C, r in C:c!=fakeris_cs_id)(C_src[t][c][r]*x[t][c][r]);

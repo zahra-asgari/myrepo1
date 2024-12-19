@@ -1,0 +1,37 @@
+//______________________________TOPOLOGY SECTION_____________________________
+
+    forall(c in C)
+        don_upgrade:
+            y_don[c] <= y_iab[c];
+
+    //one_don:
+    //    sum(c in C)(y_don[c]) == 1;
+
+    forall(c in C, d in C)
+        bh_link_act_1:
+            z[c][d] <= bh_p_mask[c][d]*y_iab[c];
+
+    forall(c in C, d in C)
+        bh_link_act_2:
+            z[c][d] <= bh_p_mask[c][d]*y_iab[d];
+
+    forall(c in C, t in T)
+        acc_link_act:
+            x[c][t] <= y_iab[c]*acc_p_mask[c][t];
+
+    forall(c in C)
+        tree:
+            sum(d in C)(z[d][c]) <= 1 - y_don[c];
+
+    forall(c in C, d in C)
+        oneway:
+            z[c][d] + z[d][c] <= 1;
+
+    forall(t in T)
+        k_cov:
+            sum(c in C)(x[c][t]) == 1;
+
+
+    forall(t in T)
+        avg_len:
+            avg_lin_len[t] >= sum(d in C)(x[d][t]*tp_cs_dist[t][d]);

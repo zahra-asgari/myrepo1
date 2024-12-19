@@ -1,0 +1,35 @@
+//______________________________ANGLES SECTION_____________________________
+
+    //forall(t in T, d in C, r in C, p in P)
+    //    orientation1:
+    //        delta[r] >= cs_tp_angles[r][t][p] - angle_span - 360*(1-x[t][d][r][p]);
+    //forall(t in T, d in C, r in C, p in P)
+    //    orientation2:
+    //        delta[r] <= cs_tp_angles[r][t][p] + angle_span + 360*(1-x[t][d][r][p]);
+    //forall(t in T, d in C, r in C,p in P)        
+    //    orientation3:
+    //        delta[r] >= cs_cs_angles[r][d] - angle_span - 360*(1-x[t][d][r][p]);
+    //forall(t in T, d in C, r in C, p in P)
+    //    orientation4:
+    //        delta[r] <= cs_cs_angles[r][d] + angle_span + 360*(1-x[t][d][r][p]);
+
+    //forall(t in T, d in C, r in C, p in P)
+    //    orientation1:
+    //        delta[r] >= (cs_tp_angles[r][t][p]-angle_span)*x[t][d][r][p];
+    //forall(t in T, d in C, r in C, p in P)
+    //    orientation2:
+    //        delta[r] <= 360 - (360 - cs_tp_angles[r][t][p] - angle_span)*x[t][d][r][p];
+    //forall(t in T, d in C, r in C,p in P)        
+    //    orientation3:
+    //        delta[r] >= (cs_cs_angles[r][d] - angle_span)*x[t][d][r][p];
+    //forall(t in T, d in C, r in C, p in P)
+    //    orientation4:
+    //        delta[r] <= 360 - (360 - cs_cs_angles[r][d] - angle_span)*x[t][d][r][p];
+
+    //forall(t in T, p in P)
+    //    min_angle_sep:
+    //        sum(d in C, r in C)(x[t][d][r][p]*angsep[t][d][r][p]) >= min_angsep;
+
+    forall(p in P)
+        avg_angsep:
+            sum(t in T, d in C, r in C)(x[t][d][r][p]*angsep[t][d][r][p])/n_tp >= min_avg_angsep;

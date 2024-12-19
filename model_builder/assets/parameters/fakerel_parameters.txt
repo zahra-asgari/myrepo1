@@ -1,0 +1,34 @@
+//----------PARAMETERS----------------
+int n_cs = ...;
+int n_tp = ...;
+
+range C = 1..n_cs;
+range T = 1..n_tp;
+
+float donor_price=...;   //price of installing one donor in c
+float rel_price=...;
+float iab_price=...;
+float B=...;
+
+
+float af_p_mask[T][C][C]=...; //one if SRC can be established
+int bh_p_mask[C][C]=...;
+
+
+//angles
+float cs_tp_angles[C][T]=...;
+float cs_cs_angles[C][C]=...;
+float angle_span=...;
+
+float tp_cs_dist[T][C]=...;
+float max_linlen=...;
+float linlen_emphasis=...;
+
+//capacity
+float C_bh[C][C]=...;
+float D=...;
+float C_acc[T][C][C]=...;
+
+//fakerel
+
+int fakerel_id =...;

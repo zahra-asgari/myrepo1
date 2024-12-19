@@ -1,0 +1,44 @@
+//______________________________FLOW SECTION_____________________________
+
+    forall(c in C,d in C)
+        flow_act:
+            f[c][d] <= C_bh[c][d]*z[c][d];
+    forall(c in C,d in C)
+        flow_not_empty:
+            f[c][d] >= min_rate*z[c][d];
+
+    forall(c in C)
+        node_flow_balance:
+            w[c] + sum(d in C)(f[d][c] - f[c][d]) - sum(t in T, r in C)(g[t][c][r]) == 0;
+
+    forall(t in T, c in C, r in C)
+       minimum_demand:
+            g[t][c][r] >= min_rate * x[t][c][r];
+
+    forall(t in T, c in C, r in C)
+        maximum_demand:
+            g[t][c][r] <= C_src[t][c][r] * x[t][c][r];
+
+    forall(c in C)
+        donor_total_traffic:
+            w[c] <= M_max * y_don[c];
+
+    forall(c in C: c!=fakeris_cs_id)
+        bs_tx:
+            t_tx[c] == sum(d in C: (C_bh[c][d] != 0))(f[c][d]/C_bh[c][d]) + sum(t in T, r in C: C_src[t][c][r]!=0)(g[t][c][r]/C_src[t][c][r]);
+
+    forall(c in C: c!=fakeris_cs_id)
+        bs_rx:
+            t_rx[c] == sum(d in C: (C_bh[d][c] != 0))(f[d][c]/C_bh[d][c]);
+
+    forall(c in C: c!=fakeris_cs_id)
+        bs_tdm:
+            t_tx[c] + t_rx[c] <= y_iab[c];
+
+//    forall(t in T, c in C, r in C: r!=fakeris_cs_id)
+  //       ris_policy:
+//	    g[t][c][r] <= C_ris[t][c][r]*x[t][c][r];
+
+    forall(r in C: r != fakeris_cs_id)
+        ris_tdm:
+            sum(t in T, c in C: c != r && C_ris[t][c][r]!=0)(g[t][c][r]/C_fullris[t][c][r]) <= y_ris[r];

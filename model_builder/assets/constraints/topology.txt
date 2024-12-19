@@ -1,0 +1,12 @@
+//______________________________TOPOLOGY SECTION___________________________
+    forall(t in T, d in C)
+        assignment:
+           x_don[t][d] <= y_don[d];
+
+    forall(t in T, d in C)
+        don_link:
+            x_don[t][d] <= sum(r in C)(s[t][d][r]) + L_acc[t][d];
+
+    forall(c in C)
+        construction1:
+            y_don[c] + y_ris[c] <= 1;

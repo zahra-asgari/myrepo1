@@ -1,0 +1,3 @@
+//parameters for separated installation
+int don_here[C]=...;
+int ris_here[C]=...;

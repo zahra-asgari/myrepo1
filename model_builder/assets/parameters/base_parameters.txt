@@ -1,0 +1,21 @@
+//----------PARAMETERS----------------
+int n_cs = ...;
+int n_tp = ...;
+
+range C = 1..n_cs;
+range T = 1..n_tp;
+
+float donor_price[C]=...;   //price of installing one donor in c
+float ris_price[C]=...;     //price of installing one ris in c
+float budget=...;           //planning budget
+
+
+float L_acc[T][C]=...; //one if link btween t and c can be established
+float L_bh[C][C]=...; //one if link btween c and c' can be established
+
+
+//angles
+float cs_tp_angles[C][T]=...;
+float cs_cs_angles[C][C]=...;
+float angle_span=...;
+

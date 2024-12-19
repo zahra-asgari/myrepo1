@@ -1,0 +1,12 @@
+//______________________________HALF-DUPLEX AND TDM SECTION___________________________   
+    forall(c in C)
+        tx_time:
+            tt[c] == sum(d in C: d != c)((f[c][d]+f_ul[c][d])/u[c][d]) + sum(t in T, r in C: c!=r)((max_airtime_dl_ris[t][c][r]+max_airtime_ul_ris[t][c][r])*x_ris[t][c][r]+(max_airtime_dl_sr[t][c][r]+max_airtime_ul_sr[t][c][r])*x_sr[t][c][r]);
+
+    forall(c in C)
+        rx_time:
+            tr[c] == sum(d in C: d != c)((f[d][c]+f_ul[d][c])/u[d][c]);
+
+    forall(c in C)
+        half_duplex:
+            tt[c] + tr[c] <= y_iab[c];

@@ -1,0 +1,9 @@
+//-------EXTRA TRAFFIC VARIABLES-------------
+
+//TRAFFIC FLOW
+dvar float+ w_dl_x[T][C]; //extra downlink core traffic
+dvar float+ w_ul_x[T][C]; //extra uplink core traffic
+dvar float+ f_dl_x[T][C][C]; //extra downlink backhaul traffic
+dvar float+ f_ul_x[T][C][C]; //extra uplink backhaul traffic
+dvar float+ g_dl_x[T][C][C][S]; //extra downlink access traffic
+dvar float+ g_ul_x[T][C][C][S]; //extra uplink access traffic

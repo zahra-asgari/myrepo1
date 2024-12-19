@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+maximize sum(t in T, c in C, r in C)(g[t][c][r]);

@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+maximize min_avg_angsep;

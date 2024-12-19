@@ -1,0 +1,13 @@
+//-----------SNR VARIABLE SETTING
+    forall(t in T, d in C)
+        snrPeakLos:
+            snr_peak_los[t][d] == sum(k in C)(gamma[t][d][k]*s[t][d][k]) + sum(k in C)(theta_los[t][d][k]*s[t][d][k]*L_acc[t][d]) + phi_los[t][d]*L_acc[t][d]*x_don[t][d];
+    forall(t in T, d in C)    
+        snrPeakNlos:
+            snr_peak_nlos[t][d] == sum(k in C)(gamma[t][d][k]*s[t][d][k]) + sum(k in C)(theta_nlos[t][d][k]*s[t][d][k]*L_acc[t][d]) + phi_nlos[t][d]*L_acc[t][d]*x_don[t][d];
+    forall(t in T, d in C)
+        snrAvgLos:
+            snr_avg_los[t][d] == sum(k in C)(gamma[t][d][k]*timeshare_ris[t][d][k]) + sum(k in C)(theta_los[t][d][k]*timeshare_ris[t][d][k]*L_acc[t][d]) + phi_los[t][d]*L_acc[t][d]*timeshare_don[t][d];
+    forall(t in T, d in C)
+        snrAvgNlos:
+            snr_avg_nlos[t][d] == sum(k in C)(gamma[t][d][k]*timeshare_ris[t][d][k]) + sum(k in C)(theta_nlos[t][d][k]*timeshare_ris[t][d][k]*L_acc[t][d]) + phi_nlos[t][d]*L_acc[t][d]*timeshare_don[t][d];

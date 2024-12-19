@@ -1,0 +1,6 @@
+//______________________________K-COVERAGE SECTION___________________________
+
+    forall(t in T)
+        k_cov:
+            sum(c in C,d in C: c!=d) x[t][c][d] == 1;
+  

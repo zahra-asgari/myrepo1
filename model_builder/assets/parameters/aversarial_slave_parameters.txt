@@ -1,0 +1,19 @@
+//----------PARAMETERS----------------
+int n_donors = ...;
+int n_ris = ...;
+int n_tp = ...;
+
+range D = 1..n_donors;
+range R = 1..n_ris;
+range T = 1..n_tp;
+
+
+float acc_p_mask[T][D][R]=...;
+//float forbidden_assoc[T][D][R]=...;
+
+float max_tp = ...;
+float A_min = ...;
+float A_max = ...;
+
+//angles
+float angsep[T][D][R]=...;

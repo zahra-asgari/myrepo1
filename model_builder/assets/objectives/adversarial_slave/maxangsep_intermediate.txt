@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+maximize sum(t in T, d in D, r in R)(x[t][d][r]*angsep[t][d][r])/max_tp;

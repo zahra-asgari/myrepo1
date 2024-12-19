@@ -1,0 +1,24 @@
+//______________________________EXISTENCE SECTION___________________________
+    
+    forall(c in C)
+        IAB_RIS_SR_trichotomy:
+            y_iab[c]+y_ris[c]+y_sr[c] <= 1;
+
+    forall(c in C)
+        donor_condition:
+            y_don[c] <= y_iab[c];
+
+        single_donor:
+            sum(c in C)(y_don[c]) == 1;
+            //sum(c in C)(y_don[c]) == 1;
+
+        //only_ris:
+            //sum(c in C)(y_sr[c]) == 0;
+
+        only_sr:
+            sum(c in C)(y_ris[c]) == 0;
+
+        
+
+
+        

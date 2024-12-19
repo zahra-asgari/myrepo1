@@ -1,0 +1,12 @@
+//______________________________TOPOLOGY SECTION___________________________
+    forall(c in C)
+        construction:
+            y_don[c] + sum(f in F)(y_ris[c][f]) <= 1;
+
+    forall(t in T)
+        one_src_per_tp:
+            sum(d in C, r in C, f in F)(s[t][d][r][f]) <= 1;
+
+    forall(r in C,t in T)
+        one_bs_per_src:
+            sum(d in C, f in F)(s[t][d][r][f]) <= 1;

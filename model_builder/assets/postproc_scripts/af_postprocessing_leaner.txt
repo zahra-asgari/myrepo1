@@ -1,0 +1,116 @@
+
+//---------POST PROCESSING----------
+
+execute{
+
+var ofile = new IloOplOutputFile(output_filename);
+var output = "";
+
+var after = new Date();
+var output = "time = "
+output += after.getTime()-temp
+output += ";"
+ofile.writeln(output);
+
+//------variable y_don
+
+output = "y_don = [";
+
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_don[c];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+//------variable y_ris
+output = "y_ris = [";
+for(var c in thisOplModel.C){
+    for(var f in thisOplModel.F){
+        output+= thisOplModel.y_ris[c][f]
+        if (f == thisOplModel.n_f){
+            output += ";"
+        } else {
+            output += " "
+        }
+    }
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable s
+//this is a 3D variable, we need to write 2D slices
+for(var f in thisOplModel.F){//outer slices loop
+for(var r in thisOplModel.C){ //inner slices loop
+    output = "s(:,:,";
+    output += r;
+    output += ","
+    output += f;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.s[t][d][r][f];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}}
+
+//------variable phi_max
+output = "phi_max = [";
+for (var c in thisOplModel.C){
+    output+=thisOplModel.phi_max[c];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+//------variable phi_min
+output = "phi_min = [";
+for (var c in thisOplModel.C){
+    output+=thisOplModel.phi_min[c];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+
+//------variable tau
+//this is a 4D variable, we need to write 2D slices
+for(var f in thisOplModel.F){//outer slices loop
+for(var r in thisOplModel.C){ //slices loop
+    output = "tau(:,:,";
+    output += r;
+    output += ","
+    output += f;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.tau[t][d][r][f];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}}
+
+
+ofile.writeln("obj="+cplex.getObjValue()+";")
+
+ofile.close();
+
+}

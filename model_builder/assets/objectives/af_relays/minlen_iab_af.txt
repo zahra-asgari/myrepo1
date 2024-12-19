@@ -1,0 +1,3 @@
+//---------OBJECTIVE----------
+
+minimize sum(t in T)(avg_lin_len[t]);

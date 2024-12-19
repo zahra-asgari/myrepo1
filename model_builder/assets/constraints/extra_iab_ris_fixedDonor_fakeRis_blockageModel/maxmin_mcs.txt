@@ -1,0 +1,7 @@
+//______________________________MAXMIN SECTION_____________________________
+
+    forall(t in T)
+        maxmin_mcs:
+            %c_min <= sum(c in C, r in C) (C_src[t][c][r]*x[t][c][r]);
+            c_min <= sum(c in C, r in C)(g_x[t][c][r]);
+

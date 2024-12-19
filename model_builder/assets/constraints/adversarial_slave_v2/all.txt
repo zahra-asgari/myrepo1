@@ -1,0 +1,106 @@
+    forall(d in D)
+        a_count_bs_set:
+            a_count_bs[d] == sum(t in T, u in U, r in R)(a[t][d][r][u]);
+    forall(r in R)
+        a_count_ris_set:
+            a_count_ris[r] == sum(t in T, u in U, d in D)(a[t][d][r][u]);
+
+    forall(d in D)
+        a_max_bs:
+            a_count_bs[d] <= A_max;
+
+    forall(r in R)
+        a_max_ris:
+            a_count_ris[r] <= A_max;
+
+    forall(t in T, d in D, r in R,u in U)
+        k_set_one:
+            k[t][d][r][u] <= free_src[d][r];
+
+    forall(t in T, d in D, r in R,u in U)
+        k_set_three:
+            k[t][d][r][u] <= z[u][t];
+
+    forall(t in T, d in D, r in R, u in U)
+        k_set_two:
+            k[t][d][r][u] >= z[u][t] + free_src[d][r] -1;
+
+    forall(t in T)
+        z_one:
+            sum(u in U)(z[u][t]) <=1;
+
+    forall(t in T, u in U)
+        z_two:
+            sum(d in D, r in R)(a[t][d][r][u]) == z[u][t];
+    
+    forall(u in U)
+        gamma_set:
+            gamma[u] == sum(t in T, d in D, r in R)(a[t][d][r][u]*angsep[t][d][r]);
+
+    forall(u in U, t in T, d in D, r in R)
+        gamma_lim:
+            gamma[u] >= angsep[t][d][r]*k[t][d][r][u]*acc_p_mask[t][d][r];
+
+    forall(u in U)
+        select_one_pos:
+            sum(t in T, d in D, r in R)(a[t][d][r][u]) == 1;
+
+    forall(t in T, d in D, r in R, u in U)
+        acc_mask:
+            a[t][d][r][u] <= acc_p_mask[t][d][r];
+
+    forall(t in T, d in D, r in R)
+        x_set:
+            x[t][d][r] == sum(u in U)(a[t][d][r][u]);
+
+
+//----- free section 
+
+    forall(d in D)
+        free_bs_up:
+            free_bs[d] <= A_max - a_count_bs[d];
+
+    forall(d in D)
+        free_bs_down:
+            free_bs[d] >= (A_max-a_count_bs[d])/A_max;
+
+    forall(r in R)
+        free_ris_up: 
+            free_ris[r] <= A_max - a_count_ris[r];
+
+    forall(r in R)
+        free_ris_down:
+            free_ris[r] >= (A_max-a_count_ris[r])/A_max;
+
+    forall(d in D, r in R)
+        free_src_one:
+            free_src[d][r] <= free_bs[d];
+    forall(d in D, r in R)
+        free_src_two:
+            free_src[d][r] <= free_ris[r];
+    forall(d in D, r in R)
+        free_src_three:
+            free_src[d][r] >= free_bs[d] + free_ris[r] -1;
+
+
+// --- experiments 
+
+forall(t in T, d in D, r in R,u in U)
+        j_set_one:
+            j[t][d][r][u] <= 1-free_src[d][r];
+
+    forall(t in T, d in D, r in R,u in U)
+        j_set_three:
+            k[t][d][r][u] <= z[u][t];
+
+    forall(t in T, d in D, r in R, u in U)
+        j_set_two:
+            j[t][d][r][u] >= z[u][t] + (1-free_src[d][r]) -1;
+
+    forall(u in U, t in T, d in D, r in R)
+        gamma_lim_two:
+           gamma[u] >= angsep[t][d][r]*acc_p_mask[t][d][r]*j[t][d][r][u];
+
+
+
+

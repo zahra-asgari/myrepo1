@@ -1,0 +1,69 @@
+//______________________________LINK ACTIVATION SECTION___________________________
+    forall(t in T, c in C, r in C)
+        direct_assignment_RIS_iab:
+           x_ris_iab[t][c][r] <= acc_p_mask[t][c][r]*(y_iab[c]-y_don[c]);
+
+    forall(t in T, c in C, r in C)
+        RIS_activation_iab:
+            x_ris_iab[t][c][r] <= acc_p_mask[t][c][r]*y_ris[r];
+
+    forall(t in T, c in C, r in C)
+        direct_assignment_RIS_donor:
+           x_ris_don[t][c][r] <= acc_p_mask[t][c][r]*y_don[c];
+
+    forall(t in T, c in C, r in C)
+        RIS_activation_donor:
+            x_ris_don[t][c][r] <= acc_p_mask[t][c][r]*y_ris[r];
+
+    forall(t in T, c in C, r in C)
+        direct_assignment_SR_iab:
+           x_sr_iab[t][c][r] <= sr_p_mask[t][c][r]*(y_iab[c]-y_don[c]);
+
+    forall(t in T, c in C, r in C)
+        SR_activation_iab:
+            x_sr_iab[t][c][r] <= sr_p_mask[t][c][r]*y_sr[r];
+
+    forall(t in T, c in C, r in C)
+        direct_assignment_SR_donor:
+           x_sr_don[t][c][r] <= sr_p_mask[t][c][r]*y_don[c];
+
+    forall(t in T, c in C, r in C)
+        SR_activation_donor:
+            x_sr_don[t][c][r] <= sr_p_mask[t][c][r]*y_sr[r];
+
+    forall(t in T, c in C, r in C)
+        SRC_RIS:
+            x_ris[t][c][r]==x_ris_don[t][c][r]+x_ris_iab[t][c][r];
+
+    forall(t in T, c in C, r in C)
+        SRC_SR:
+            x_sr[t][c][r]==x_sr_don[t][c][r]+x_sr_iab[t][c][r];
+    
+    forall(c in C, d in C: c != d)
+        backhaul_activation1_iab:
+            z_iab[c][d] <= bh_p_mask[c][d]*(y_iab[c]-y_don[c]);
+
+    forall(c in C, d in C: c != d)
+        backhaul_activation2_iab:
+            z_iab[c][d] <= bh_p_mask[c][d]*(y_iab[d]-y_don[d]);
+
+    forall(c in C, d in C: c != d)
+        backhaul_activation1_don_tx:
+            z_don_tx[c][d] <= bh_p_mask[c][d]*y_don[c];
+
+    forall(c in C, d in C: c != d)
+        backhaul_activation2_don_tx:
+            z_don_tx[c][d] <= bh_p_mask[c][d]*y_iab[d];
+
+    forall(c in C, d in C: c != d)
+        backhaul_activation1_don_rx:
+            z_don_rx[c][d] <= bh_p_mask[c][d]*y_iab[c];
+
+    forall(c in C, d in C: c != d)
+        backhaul_activation2_don_rx:
+            z_don_rx[c][d] <= bh_p_mask[c][d]*y_don[d];
+
+    forall(c in C, d in C: c != d)
+        backhaul_link:
+            z[c][d] == z_iab[c][d]+z_don_tx[c][d]+z_don_rx[c][d];
+    

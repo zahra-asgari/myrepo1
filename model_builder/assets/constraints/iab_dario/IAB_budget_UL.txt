@@ -1,0 +1,3 @@
+//______________________________BUDGET SECTION_____________________________
+    budgeting:
+        sum(c in C)(iab_price*y_iab[c] + ris_price*y_ris[c]) <= ris_budget;

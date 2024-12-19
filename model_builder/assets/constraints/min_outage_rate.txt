@@ -1,0 +1,3 @@
+    forall(t in T)
+        minPeakOutage:
+            R_out[t] >= R_out_min;

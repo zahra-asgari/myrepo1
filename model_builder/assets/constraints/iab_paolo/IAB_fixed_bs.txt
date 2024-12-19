@@ -1,0 +1,8 @@
+//______________________________FIX BS POS SECTION___________________________
+
+    forall(c in C)
+        fixed_bs:
+           y_iab[c] == Y_IAB[c];
+
+    forall(c in C)
+            y_don[c] == Y_DON[c];

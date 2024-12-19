@@ -1,0 +1,4 @@
+//______________________________BUDGET SECTION_____________________________
+
+    budget_constraint:
+        sum(c in C : c != donor_cs_id && c != fakeris_cs_id)(y_iab[c]*iab_price + y_ris[c]*ris_price + y_ncr[c]*ncr_price) <= budget;

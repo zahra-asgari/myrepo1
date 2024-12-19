@@ -1,0 +1,108 @@
+
+//---------POST PROCESSING----------
+
+execute{
+
+var ofile = new IloOplOutputFile(output_filename);
+var output = "";
+
+var after = new Date();
+var output = "time = "
+output += after.getTime()-temp
+output += ";"
+ofile.writeln(output);
+
+//------variable y_don
+
+output = "y_don = [";
+
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_don[c];
+    output+= ";";
+}  
+output += "];"
+
+ofile.writeln(output);
+
+//------variable y_ris
+
+output = "y_ris = [";
+for(var c in thisOplModel.C){
+    output+= thisOplModel.y_ris[c];
+    output+= ";";
+}
+output += "];"
+ofile.writeln(output);
+
+
+//------variable s
+//this is a 3D variable, we need to write 2D slices
+for(var r in thisOplModel.C){ //slices loop
+    output = "s(:,:,";
+    output += r;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.s[t][d][r];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}
+
+//------variable delta
+output = "delta = [";
+for (var c in thisOplModel.C){
+    output+=thisOplModel.delta[c];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+
+//------variable tau_ris
+//this is a 3D variable, we need to write 2D slices
+for(var r in thisOplModel.C){ //slices loop
+    output = "tau_ris(:,:,";
+    output += r;
+    output += ") = ["
+
+    //print slice
+    for(var t in thisOplModel.T){
+        for(var d in thisOplModel.C){
+            output+= thisOplModel.tau_ris[t][d][r];
+            if(d == thisOplModel.n_cs){
+                output += ";"
+            } else {
+            output += " "
+            }
+        }
+    }
+    output += "];"
+    ofile.writeln(output);
+}
+
+
+
+//------variable R
+output = "R = [";
+for (var t in thisOplModel.T){
+    output+=thisOplModel.R[t];
+    output+=";";
+}
+output += "];"
+ofile.writeln(output);
+
+
+ofile.writeln("obj="+cplex.getObjValue()+";")
+
+ofile.close();
+
+}
