@@ -40,3 +40,6 @@ int donor_cs_id=...;
 int fakeris_cs_id=...;
 int ris_id=...;
 int ncr_id=...;
+
+//probability of unsatisfaction
+float+ P_unsatisfied[T][C][C][S] = ...; 

@@ -14,10 +14,10 @@ ofile.writeln(output);
 
 //-------variable P_unsatisfied
 
+
 output = "P_unsatisfied = [";
-for(var t in thisOplModel.T){
-    output += thisOplModel.P_unsatisfied[t];
-    output += ";";
+for (var t in thisOplModel.T) {
+    output += thisOplModel.P_unsatisfied[t] + ";";
 }
 output += "];";
 ofile.writeln(output);

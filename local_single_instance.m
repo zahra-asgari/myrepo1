@@ -14,7 +14,7 @@ instance_folder = 'instances/';
 
 % this is the name of the generated data to be saved (matlab-compatible and
 % opl-compatible data are saved)
-rng_seed = 40;
+rng_seed = 47;
 dataname = int2str(rng_seed);
 
 
@@ -29,7 +29,7 @@ model_folder = 'models/';
 % this is the name of the model to be used to solve this particular
 % instance - it should currespond to any model template name in
 % model_builder/templates
-model_name = 'complete_fixedDonor_blockageModel_sum_mean';
+model_name = 'complete_fixedDonor_blockageModel_Unsatisfied';
 
 % call instance constructor
 ins = instance_complete_fixedDonor_blockageModel(scenario,global_options,instance_folder,dataname,model_folder,model_name,rng_seed);
@@ -43,7 +43,7 @@ ins.generate();
 ins.save_data();
 
 % solve the planning instance
-% ins.solve();
+ins.solve();
 
 %plot the solution 
 %ins.plot_solution();

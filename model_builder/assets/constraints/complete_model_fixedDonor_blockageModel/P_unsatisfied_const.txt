@@ -1,8 +1,4 @@
 //____________________________unsatisfaction prob_____________________________
-    forall(t in T)
-    P_unsatisfied[t] = sum(c in C, r in C, s in S, i in 1..16)
-        x[t][c][r][s] *
-        P[t][c][r][s][i] *
-        ((C_DIR_DL[t][c][r][s][i] < min_rate_dl || C_DIR_UL[t][c][r][s][i] < min_rate_ul) &&
-         (C_IND_DL[t][c][r][s][i] < min_rate_dl || C_IND_UL[t][c][r][s][i] < min_rate_ul));
-
+forall(t in T)
+  P_unsatisfied[t] == sum(c in C, r in C, s in S) 
+    x[t][c][r][s] * P_unsatisfied[t][c][r][s];

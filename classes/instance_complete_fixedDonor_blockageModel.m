@@ -124,21 +124,22 @@
                         [bh_rates,backhaul_snr]=backhaul_rates_high_donor_complete(prm,pl_settings,geometry.iab_positions_3d); %backhaul rates
 
                         %% Probabilitiy of unsatisfaction:
-                         
 
-                        % Combine Direct and Indirect Rates for DL and UL
-                        rates_combined.dir_DL = state_rates.DL.dir; % Direct link DL rates
-                        rates_combined.dir_UL = state_rates.UL.dir; % Direct link UL rates
-                        rates_combined.ris_DL = state_rates.DL.ris; % RIS link DL rates
-                        rates_combined.ris_UL = state_rates.UL.ris; % RIS link UL rates
-                        rates_combined.ncr_DL = state_rates.DL.ncr; % NCR link DL rates
-                        rates_combined.ncr_UL = state_rates.UL.ncr; % NCR link UL rates
+                        % Combine rates and probabilities
+                        state_probabilities = state_probs.DL; % Assuming state_probs.DL and state_probs.UL are identical
+                        state_rates_combined.dir_DL = state_rates.DL.dir;
+                        state_rates_combined.dir_UL = state_rates.UL.dir;
+                        state_rates_combined.ris_DL = state_rates.DL.ris;
+                        state_rates_combined.ris_UL = state_rates.UL.ris;
+                        state_rates_combined.ncr_DL = state_rates.DL.ncr;
+                        state_rates_combined.ncr_UL = state_rates.UL.ncr;
 
-                        % Compute Unsatisfied User Probability
+                        % Define minimum capacity thresholds
                         C_min_DL = sim.alpha * sim.R_dir_min;
                         C_min_UL = (1 - sim.alpha) * sim.R_dir_min;
 
-                        P_unsatisfied = calculate_P_unsatisfied(rates_combined, state_probs.DL, C_min_DL, C_min_UL);
+                        % Calculate P_unsatisfied
+                        Prob_unsatisfied = calculate_P_unsatisfied(state_probabilities, state_rates_combined, C_min_DL, C_min_UL);
 
 
                           
@@ -203,7 +204,7 @@
             %instance_struct.linlen = cs_tp_distance_matrix';
             
             % Store the result in the instance structure
-            instance_struct.P_unsatisfied = P_unsatisfied;
+            instance_struct.P_unsatisfied = Prob_unsatisfied;
 
             instance_struct.C_bh = bh_rates;
             instance_struct.C_src_dl(:,:,:,find(sim.SD_list == 'RIS')) = avg_rates.DL.ris;
@@ -216,7 +217,7 @@
             instance_struct.C_sd_ul(:,:,:,find(sim.SD_list == 'NCR')) = sd_rates.UL.ncr;
             instance_struct.min_rate_dl = sim.alpha*sim.R_dir_min;
             instance_struct.min_rate_ul = (1-sim.alpha)*sim.R_dir_min;
-	    instance_struct.alpha = sim.alpha;
+	        instance_struct.alpha = sim.alpha;
 
             instance_struct.cs_tp_angles = cs_tp_angles;
             instance_struct.cs_cs_angles = cs_cs_angles;

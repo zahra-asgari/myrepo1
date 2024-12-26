@@ -1,2 +1,2 @@
-minimize sum(t in T)
-    P_unsatisfied[t];
+//---------OBJECTIVE---------
+minimize sum(t in T) P_unsatisfied[t];
